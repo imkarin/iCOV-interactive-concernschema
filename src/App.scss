@@ -1,0 +1,55 @@
+.App {
+  *, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box    ;
+  }
+  
+  position: relative;
+  text-align: left;
+
+  a {
+    text-decoration: none;
+    color: rgb(90, 90, 90)
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+
+  header {
+    width: 100%;
+    height: 70px;
+    padding: 20px 40px 20px 30px;
+    background-color: #f1f1f1;
+
+    nav {
+      margin-left: calc(100% - 540px); /* window width - nav width - padding */
+      width: 500px;
+      display: flex;
+      justify-content: space-between;
+
+      img {
+        position: absolute;
+        left: 30px;
+        width: 75px;
+      }
+    }
+  }
+
+  main {
+    display: flex;
+
+    section {
+      padding: 20px 40px 20px 30px;
+          
+    
+      &:first-of-type {
+        height: 100%;
+        width: 20%;
+        min-width: 250px;
+        background-color: #fafafa;
+      }
+    }
+  }
+}
