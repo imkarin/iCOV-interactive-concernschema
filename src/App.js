@@ -1,22 +1,14 @@
 import React from 'react';
 import './App.css';
-import logo from './images/iCOV.svg';
+import Header from './components/Header/Header.js'
+import Filtersection from './components/Filtersection/Filtersection.js';
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <nav>
-          <img src={logo} alt="iCOV logo"></img>
-          <a href="/">Link</a>
-          <a href="/">Link</a>
-          <a href="/">Link</a>
-          <a href="/">Link</a>
-        </nav>
-      </header>
-
+      <Header />
       <main>
-        <section>Filter section</section>
+        <Filtersection />
         <section>Data view section</section>
       </main>
     </div>
