@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header.js'
+import Header from './components/Header/Header.js';
 import Filtersection from './components/Filtersection/Filtersection.js';
+import Datasection from './components/Datasection/Datasection.js';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Header />
       <main>
         <Filtersection />
-        <section>Data view section</section>
+        <Datasection />
       </main>
     </div>
   );
