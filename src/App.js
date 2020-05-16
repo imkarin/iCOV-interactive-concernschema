@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
+import logo from './images/iCOV.svg';
 
 function App() {
   return (
     <div className="App">
       <header>
         <nav>
-          <img src="https://icov.nl/wp-content/themes/icov/img/iCOV.svg" alt="iCOV logo"></img>
+          <img src={logo} alt="iCOV logo"></img>
           <a href="/">Link</a>
           <a href="/">Link</a>
           <a href="/">Link</a>
