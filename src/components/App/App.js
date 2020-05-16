@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header.js';
-import Filtersection from './components/Filtersection/Filtersection.js';
-import Datasection from './components/Datasection/Datasection.js';
+import Header from '../Header/Header.js';
+import Filtersection from '../Filtersection/Filtersection.js';
+import Datasection from '../Datasection/Datasection.js';
 
 function App() {
   return (
