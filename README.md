@@ -18,7 +18,7 @@ De inhoudelijke beschrijving van het Programma van Eisen verdelen wij in diverse
 
 2. Clone de volgende repository
 ```
-git clone https://github.com/Awana1/iCOV-Concernschema.git
+git clone https://github.com/karimeij/iCOV-interactive-concernschema.git
 ```
 
 3. Installeer knooppuntmodules
