@@ -1,2 +1,35 @@
 .Datasection{padding:20px 40px 20px 30px;width:80%}
 /*# sourceMappingURL=Datasection.css.map */
+
+
+
+  .link line {
+     stroke: #777;
+     stroke-opacity: 0.3;
+     stroke-width: 1.5px;
+  }
+  
+  .node circle {
+     fill: hotpink;
+  stroke: hotpink;
+  stroke-width: 10px;
+  }
+  
+
+  .node text {
+     display: none;
+     font: 10px sans-serif;
+   }
+   
+   .node:hover circle {
+     fill: #000;
+   }
+   
+   .node:hover text {
+     display: inline;
+   }
+   
+   .cell {
+     fill: none;
+     pointer-events: all;
+   }
