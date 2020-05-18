@@ -28,7 +28,7 @@ npm install
 
 4. Voer de applicatie uit
 ```
-npm app.js
+npm start
 ```
 
 ## License
