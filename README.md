@@ -3,7 +3,7 @@ Een interactief concernschema voor het weergeven van bedrijfsrelaties voor iCOV.
 Ontwikkeld door CMD Design Agency: Azam Awan, Karin Meijvogel, Maud Houtman, Mees Luxwolda
 
 ## Live prototype
-Bekijk het prototype live op [deze pagina](https://karimeij.github.io/icov-interactive-concernschema)
+Bekijk het prototype live op [deze pagina](https://karimeij.github.io/iCOV-interactive-concernschema).
 
 ## iCOV Digitaal Concernschema
 Dit is onze project repository voor het ontwikkelen van een digitaal, interactief concernschema voor iCOV. Dit gebeurt vanuit een team dat werkt onder de CMD Design Agency.
