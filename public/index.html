@@ -78,36 +78,134 @@
             let entities = [];
             class Entity {
               constructor(
+              label,
+              description,
               entityId,
               identity,
               labelIsIdentity,
-              description,
-              attributes
+              city,
+              country,
+              dateOfBirth,
+              dateOfDeath,
+              departmentId,
+              departmentName,
+              edgeLabel,
+              edgeNotes1,
+              edgeNotes2,
+              firstName,
+              fromDate,
+              id,
+              lastName,
+              locationId,
+              managerId,
+              notes1,
+              notes2,
+              notities1,
+              notities2,
+              numberOfStaff,
+              postalCode,
+              sex,
+              streetAddress,
+              toDate,
+              type,
+              icovNodeId,
+              icovNodeType,
+              icovNodeSubtype,
+              icovNodeOrFlag,
+              icovNodeKey,
+              icovAditumQuery,
               ) {
+                this.label = label;
+                this.description = description;
                 this.entityId = entityId;
                 this.identity = identity;
                 this.labelIsIdentity = labelIsIdentity;
-                this.description = description;
-                this.attributes = attributes;
+                this.city = city,
+                this.country = country,
+                this.dateOfBirth = dateOfBirth,
+                this.dateOfDeath = dateOfDeath,
+                this.departmentId = departmentId,
+                this.departmentName = departmentName,
+                this.edgeLabel = edgeLabel,
+                this.edgeNotes1 = edgeNotes1,
+                this.edgeNotes2 = edgeNotes2,
+                this.firstName = firstName,
+                this.fromDate = fromDate,
+                this.id = id,
+                this.lastName = lastName,
+                this.locationId = locationId,
+                this.managerId = managerId,
+                this.notes1 = notes1,
+                this.notes2 = notes2,
+                this.notities1 = notities1,
+                this.notities2 = notities2,
+                this.numberOfStaff = numberOfStaff,
+                this.postalCode = postalCode,
+                this.sex = sex,
+                this.streetAddress = streetAddress,
+                this.toDate = toDate,
+                this.type = type,
+                this.icovNodeId = icovNodeId,
+                this.icovNodeType = icovNodeType,
+                this.icovNodeSubtype = icovNodeSubtype,
+                this.icovNodeOrFlag = icovNodeOrFlag,
+                this.icovNodeKey = icovNodeKey,
+                this.icovAditumQuery = icovAditumQuery
               }
             }
 
             d3.select(document).selectAll("Entity").each(function() {
-              const attributes = this.closest("ChartItem").getElementsByTagName("Attribute");
+              const rawAttributes = this.closest("ChartItem").getElementsByTagName("Attribute")
+              let attributes = {}
 
-              const thingy = this.closest("ChartItem").getElementsByTagName("Attribute")
-
-              Array.from(thingy).forEach(thing => console.log(Array.from(thing.attributes)))
-              // console.log(thingy.length)
+              Array.from(rawAttributes).forEach(attr => {
+                const AttributeName = attr.getAttribute("AttributeClassReference")
+                const AttributeValue = attr.getAttribute("Value")
+                attributes[AttributeName] = AttributeValue
+                })
 
               entities.push(new Entity(
+                this.closest("ChartItem").getAttribute("Label"),
+                this.closest("ChartItem").getAttribute("Description"),
                 this.getAttribute("EntityId"),
                 this.getAttribute("Identity"),
                 this.getAttribute("LabelIsIdentity"),
-                this.closest("ChartItem").getAttribute("Description"),
-                attributes
+                attributes._CITY,
+                attributes._COUNTRY,
+                attributes._DATE_OF_BIRTH,
+                attributes._DATE_OF_DEATH,
+                attributes._DEPARTMENT_ID,
+                attributes._DEPARTMENT_NAME,
+                attributes._EDGE_LABEL,
+                attributes._EDGE_NOTES1,
+                attributes._EDGE_NOTES2,
+                attributes._FIRST_NAME,
+                attributes._FROM_DATE,
+                attributes._ID,
+                attributes._LABEL,
+                attributes._LAST_NAME,
+                attributes._LOCATION_ID,
+                attributes._MANAGER_ID,
+                attributes._NOTES1,
+                attributes._NOTES2,
+                attributes._NOTITIES1,
+                attributes._NOTITIES2,
+                attributes._NUMBER_OF_STAFF,
+                attributes._POSTAL_CODE,
+                attributes._SEX,
+                attributes._STREET_ADDRESS,
+                attributes._TO_DATE,
+                attributes._TYPE,
+                attributes.iCOV_node_id,
+                attributes.iCOV_node_type,
+                attributes.iCOV_node_subtype,
+                attributes.iCOV_node_or_flag,
+                attributes.iCOV_node_key,
+                attributes.iCOV_Aditum_Query
                 ));
             })
+
+            console.log(entities)
 
             // 01 Laad enkel de ChartItems (entiteiten) in als nodes & leg links
             // 02 Zet attribute tags om in attributes/properties van de nodes
