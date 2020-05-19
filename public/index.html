@@ -42,105 +42,117 @@
 
     <svg width="2000" height="1000"></svg>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    
+
         <script>
           var svg = d3.select("svg"),
               width = +svg.attr("width"),
               height = +svg.attr("height");
-          
+
           var radius = d3.scaleSqrt()
               .domain([0, 20000])
               .range([0, 20]);
-          
+
           var link = svg.append("g")
               .attr("class", "link")
             .selectAll("line");
-          
+
           var node = svg.append("g")
               .attr("class", "node")
             .selectAll("circle");
-          
+
           var drag = d3.drag()
               .on("start", dragstarted)
               .on("drag", dragged)
               .on("end", dragended);
-          
+
           var simulation = d3.forceSimulation()
               .force("link", d3.forceLink())
               .force("charge", d3.forceManyBody())
               .force("center", d3.forceCenter(width / 2, height / 2))
               .on("tick", ticked)
               .stop();
-          
+
           d3.xml("flare.xml", function(error, document) {
             if (error) throw error;
 
-            // Getting starting + ending points of a link (line)
-            d3.select(document).selectAll("ChartItem").each(function() {
-              let linkFrom = this.children[0].getAttribute("End1Id")
-              let linkTo = this.children[0].getAttribute("End2Id")
-              // console.log(linkFrom + " to " + linkTo)
+            let entities = [];
+            class Entity {
+              constructor(
+              entityId,
+              identity,
+              labelIsIdentity,
+              description,
+              attributes
+              ) {
+                this.entityId = entityId;
+                this.identity = identity;
+                this.labelIsIdentity = labelIsIdentity;
+                this.description = description;
+                this.attributes = attributes;
+              }
+            }
+
+            d3.select(document).selectAll("Entity").each(function() {
+              const attributes = this.closest("ChartItem").getElementsByTagName("Attribute");
+
+              const thingy = this.closest("ChartItem").getElementsByTagName("Attribute")
+
+              Array.from(thingy).forEach(thing => console.log(Array.from(thing.attributes)))
+              // console.log(thingy.length)
+
+              entities.push(new Entity(
+                this.getAttribute("EntityId"),
+                this.getAttribute("Identity"),
+                this.getAttribute("LabelIsIdentity"),
+                this.closest("ChartItem").getAttribute("Description"),
+                attributes
+                ));
             })
 
-            // Prepend string to each End1Id and End2Id (prepend 'from' and 'to')
-            d3.select(document).selectAll("Link")
-              .attr("End1Id", function(){ return "from" + this.getAttribute("End1Id")})
-              .attr("End2Id", function(){ return "to" + this.getAttribute("End2Id")})
-
-            // Prepend a string to each EntityId (prepend 'id')
-            d3.select(document).selectAll("Entity")
-              .attr("EntityId", function(){ return "id" + this.getAttribute("EntityId")})
-
-            // Selecting a node based on an attribute (EntityId)
-            d3.select(document).select("[EntityId=id2458288]").each(function() {
-              console.log(this.parentNode.parentNode)
-            })
-
-            // 01 Laad enkel de ChartItems (entiteiten) in als nodes & leg links 
-            var nodes = d3.select(document).selectAll("ChartItem").nodes(),
+            // 01 Laad enkel de ChartItems (entiteiten) in als nodes & leg links
+            // 02 Zet attribute tags om in attributes/properties van de nodes
+            var nodes = entities,
                 links = nodes.slice(1).map(function(d) { return {
                   source: d,
-                  target: d.parentNode
+                  target: d
                 }; });
-          
+
             link = link.data(links).enter().append("line");
-          
+
             node = node.data(nodes).enter().append("circle")
                 .attr("r", function(d) { return radius(d.textContent) || 5; })
                 .call(drag);
-          
+
             node.append("title")
-                .text(function(d) { return d.getAttribute("Label"); });
-          
-            // 02 Zet attribute tags om in attributes/properties van de nodes
-            // ...
+                .text(function(d) { return d.entityId; });
+
 
             simulation.nodes(nodes);
             simulation.force("link").links(links);
             simulation.restart();
           });
-          
+
           function ticked() {
             link
                 .attr("x1", function(d) { return d.source.x; })
                 .attr("y1", function(d) { return d.source.y; })
                 .attr("x2", function(d) { return d.target.x; })
                 .attr("y2", function(d) { return d.target.y; });
-          
+
             node
                 .attr("cx", function(d) { return d.x; })
                 .attr("cy", function(d) { return d.y; });
           }
-          
+
           function dragstarted(d) {
             if (!d3.event.active) simulation.alphaTarget(0.3).restart();
             d.fx = d.x, d.fy = d.y;
           }
-          
+
           function dragged(d) {
             d.fx = d3.event.x, d.fy = d3.event.y;
           }
-          
+
           function dragended(d) {
             if (!d3.event.active) simulation.alphaTarget(0);
             d.fx = null, d.fy = null;

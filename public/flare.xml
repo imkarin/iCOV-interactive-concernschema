@@ -158,7 +158,7 @@ Powered by aditum()/neXum(2.0.0)"/>
                    </Entity>
                </End>
                <AttributeCollection>
-                   <Attribute AttributeClassReference="_CITY" Value="DenHaag"/>
+                   <Attribute AttributeClassReference="_CITY" Value="Den Haag"/>
 
                    <Attribute AttributeClassReference="_COUNTRY" Value="Nederland"/>
 
