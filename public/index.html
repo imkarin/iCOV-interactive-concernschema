@@ -26,6 +26,7 @@
     -->
     <title>React App</title>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
@@ -41,219 +42,234 @@
     -->
 
     <svg width="2000" height="1000"></svg>
+
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+      var svg = d3.select("svg"),
+          width = +svg.attr("width"),
+          height = +svg.attr("height");
 
-        <script>
-          var svg = d3.select("svg"),
-              width = +svg.attr("width"),
-              height = +svg.attr("height");
+      var radius = d3.scaleSqrt()
+          .domain([0, 20000])
+          .range([0, 20]);
 
-          var radius = d3.scaleSqrt()
-              .domain([0, 20000])
-              .range([0, 20]);
+      var link = svg.append("g")
+          .attr("class", "link")
+          .selectAll("line");
 
-          var link = svg.append("g")
-              .attr("class", "link")
-            .selectAll("line");
+      var node = svg.append("g")
+          .attr("class", "node")
+        .selectAll("circle");
 
-          var node = svg.append("g")
-              .attr("class", "node")
-            .selectAll("circle");
+      var drag = d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended);
 
-          var drag = d3.drag()
-              .on("start", dragstarted)
-              .on("drag", dragged)
-              .on("end", dragended);
+      var simulation = d3.forceSimulation()
+          .force("link", d3.forceLink().id((d) => { return d.entityId }))
+          .force("charge", d3.forceManyBody().strength(-75))
+          .force("center", d3.forceCenter(width / 2, height / 2))
+          .on("tick", ticked)
+          .stop();
 
-          var simulation = d3.forceSimulation()
-              .force("link", d3.forceLink())
-              .force("charge", d3.forceManyBody())
-              .force("center", d3.forceCenter(width / 2, height / 2))
-              .on("tick", ticked)
-              .stop();
+      d3.xml("flare.xml", function(error, document) {
+        if (error) throw error;
 
-          d3.xml("flare.xml", function(error, document) {
-            if (error) throw error;
+        let entities = [];
+        class Entity {
+          constructor(
+          label,
+          description,
+          entityId,
+          identity,
+          labelIsIdentity,
+          city,
+          country,
+          dateOfBirth,
+          dateOfDeath,
+          departmentId,
+          departmentName,
+          edgeLabel,
+          edgeNotes1,
+          edgeNotes2,
+          firstName,
+          fromDate,
+          id,
+          lastName,
+          locationId,
+          managerId,
+          notes1,
+          notes2,
+          notities1,
+          notities2,
+          numberOfStaff,
+          postalCode,
+          sex,
+          streetAddress,
+          toDate,
+          type,
+          icovNodeId,
+          icovNodeType,
+          icovNodeSubtype,
+          icovNodeOrFlag,
+          icovNodeKey,
+          icovAditumQuery,
+          ) {
+            this.label = label;
+            this.description = description;
+            this.entityId = entityId;
+            this.identity = identity;
+            this.labelIsIdentity = labelIsIdentity;
+            this.city = city,
+            this.country = country,
+            this.dateOfBirth = dateOfBirth,
+            this.dateOfDeath = dateOfDeath,
+            this.departmentId = departmentId,
+            this.departmentName = departmentName,
+            this.edgeLabel = edgeLabel,
+            this.edgeNotes1 = edgeNotes1,
+            this.edgeNotes2 = edgeNotes2,
+            this.firstName = firstName,
+            this.fromDate = fromDate,
+            this.id = id,
+            this.lastName = lastName,
+            this.locationId = locationId,
+            this.managerId = managerId,
+            this.notes1 = notes1,
+            this.notes2 = notes2,
+            this.notities1 = notities1,
+            this.notities2 = notities2,
+            this.numberOfStaff = numberOfStaff,
+            this.postalCode = postalCode,
+            this.sex = sex,
+            this.streetAddress = streetAddress,
+            this.toDate = toDate,
+            this.type = type,
+            this.icovNodeId = icovNodeId,
+            this.icovNodeType = icovNodeType,
+            this.icovNodeSubtype = icovNodeSubtype,
+            this.icovNodeOrFlag = icovNodeOrFlag,
+            this.icovNodeKey = icovNodeKey,
+            this.icovAditumQuery = icovAditumQuery
+          }
+        }
 
-            let entities = [];
-            class Entity {
-              constructor(
-              label,
-              description,
-              entityId,
-              identity,
-              labelIsIdentity,
-              city,
-              country,
-              dateOfBirth,
-              dateOfDeath,
-              departmentId,
-              departmentName,
-              edgeLabel,
-              edgeNotes1,
-              edgeNotes2,
-              firstName,
-              fromDate,
-              id,
-              lastName,
-              locationId,
-              managerId,
-              notes1,
-              notes2,
-              notities1,
-              notities2,
-              numberOfStaff,
-              postalCode,
-              sex,
-              streetAddress,
-              toDate,
-              type,
-              icovNodeId,
-              icovNodeType,
-              icovNodeSubtype,
-              icovNodeOrFlag,
-              icovNodeKey,
-              icovAditumQuery,
-              ) {
-                this.label = label;
-                this.description = description;
-                this.entityId = entityId;
-                this.identity = identity;
-                this.labelIsIdentity = labelIsIdentity;
-                this.city = city,
-                this.country = country,
-                this.dateOfBirth = dateOfBirth,
-                this.dateOfDeath = dateOfDeath,
-                this.departmentId = departmentId,
-                this.departmentName = departmentName,
-                this.edgeLabel = edgeLabel,
-                this.edgeNotes1 = edgeNotes1,
-                this.edgeNotes2 = edgeNotes2,
-                this.firstName = firstName,
-                this.fromDate = fromDate,
-                this.id = id,
-                this.lastName = lastName,
-                this.locationId = locationId,
-                this.managerId = managerId,
-                this.notes1 = notes1,
-                this.notes2 = notes2,
-                this.notities1 = notities1,
-                this.notities2 = notities2,
-                this.numberOfStaff = numberOfStaff,
-                this.postalCode = postalCode,
-                this.sex = sex,
-                this.streetAddress = streetAddress,
-                this.toDate = toDate,
-                this.type = type,
-                this.icovNodeId = icovNodeId,
-                this.icovNodeType = icovNodeType,
-                this.icovNodeSubtype = icovNodeSubtype,
-                this.icovNodeOrFlag = icovNodeOrFlag,
-                this.icovNodeKey = icovNodeKey,
-                this.icovAditumQuery = icovAditumQuery
-              }
-            }
+        d3.select(document).selectAll("Entity").each(function() {
+          const rawAttributes = this.closest("ChartItem").getElementsByTagName("Attribute")
+          let attributes = {}
 
-            d3.select(document).selectAll("Entity").each(function() {
-              const rawAttributes = this.closest("ChartItem").getElementsByTagName("Attribute")
-              let attributes = {}
-
-              Array.from(rawAttributes).forEach(attr => {
-                const AttributeName = attr.getAttribute("AttributeClassReference")
-                const AttributeValue = attr.getAttribute("Value")
-                attributes[AttributeName] = AttributeValue
-                })
-
-              entities.push(new Entity(
-                this.closest("ChartItem").getAttribute("Label"),
-                this.closest("ChartItem").getAttribute("Description"),
-                this.getAttribute("EntityId"),
-                this.getAttribute("Identity"),
-                this.getAttribute("LabelIsIdentity"),
-                attributes._CITY,
-                attributes._COUNTRY,
-                attributes._DATE_OF_BIRTH,
-                attributes._DATE_OF_DEATH,
-                attributes._DEPARTMENT_ID,
-                attributes._DEPARTMENT_NAME,
-                attributes._EDGE_LABEL,
-                attributes._EDGE_NOTES1,
-                attributes._EDGE_NOTES2,
-                attributes._FIRST_NAME,
-                attributes._FROM_DATE,
-                attributes._ID,
-                attributes._LAST_NAME,
-                attributes._LOCATION_ID,
-                attributes._MANAGER_ID,
-                attributes._NOTES1,
-                attributes._NOTES2,
-                attributes._NOTITIES1,
-                attributes._NOTITIES2,
-                attributes._NUMBER_OF_STAFF,
-                attributes._POSTAL_CODE,
-                attributes._SEX,
-                attributes._STREET_ADDRESS,
-                attributes._TO_DATE,
-                attributes._TYPE,
-                attributes.iCOV_node_id,
-                attributes.iCOV_node_type,
-                attributes.iCOV_node_subtype,
-                attributes.iCOV_node_or_flag,
-                attributes.iCOV_node_key,
-                attributes.iCOV_Aditum_Query
-                ));
+          Array.from(rawAttributes).forEach(attr => {
+            const AttributeName = attr.getAttribute("AttributeClassReference")
+            const AttributeValue = attr.getAttribute("Value")
+            attributes[AttributeName] = AttributeValue
             })
 
-            console.log(entities)
+          entities.push(new Entity(
+            this.closest("ChartItem").getAttribute("Label"),
+            this.closest("ChartItem").getAttribute("Description"),
+            this.getAttribute("EntityId"),
+            this.getAttribute("Identity"),
+            this.getAttribute("LabelIsIdentity"),
+            attributes._CITY,
+            attributes._COUNTRY,
+            attributes._DATE_OF_BIRTH,
+            attributes._DATE_OF_DEATH,
+            attributes._DEPARTMENT_ID,
+            attributes._DEPARTMENT_NAME,
+            attributes._EDGE_LABEL,
+            attributes._EDGE_NOTES1,
+            attributes._EDGE_NOTES2,
+            attributes._FIRST_NAME,
+            attributes._FROM_DATE,
+            attributes._ID,
+            attributes._LAST_NAME,
+            attributes._LOCATION_ID,
+            attributes._MANAGER_ID,
+            attributes._NOTES1,
+            attributes._NOTES2,
+            attributes._NOTITIES1,
+            attributes._NOTITIES2,
+            attributes._NUMBER_OF_STAFF,
+            attributes._POSTAL_CODE,
+            attributes._SEX,
+            attributes._STREET_ADDRESS,
+            attributes._TO_DATE,
+            attributes._TYPE,
+            attributes.iCOV_node_id,
+            attributes.iCOV_node_type,
+            attributes.iCOV_node_subtype,
+            attributes.iCOV_node_or_flag,
+            attributes.iCOV_node_key,
+            attributes.iCOV_Aditum_Query
+            ));
+        })
 
-            // 01 Laad enkel de ChartItems (entiteiten) in als nodes & leg links
-            // 02 Zet attribute tags om in attributes/properties van de nodes
-            var nodes = entities,
-                links = nodes.slice(1).map(function(d) { return {
-                  source: d,
-                  target: d
-                }; });
-
-            link = link.data(links).enter().append("line");
-
-            node = node.data(nodes).enter().append("circle")
-                .attr("r", function(d) { return radius(d.textContent) || 5; })
-                .call(drag);
-
-            node.append("title")
-                .text(function(d) { return d.entityId; });
-
-
-            simulation.nodes(nodes);
-            simulation.force("link").links(links);
-            simulation.restart();
-          });
-
-          function ticked() {
-            link
-                .attr("x1", function(d) { return d.source.x; })
-                .attr("y1", function(d) { return d.source.y; })
-                .attr("x2", function(d) { return d.target.x; })
-                .attr("y2", function(d) { return d.target.y; });
-
-            node
-                .attr("cx", function(d) { return d.x; })
-                .attr("cy", function(d) { return d.y; });
+        let connections = []
+        class Connection {
+          constructor(source, target) {
+            this.source = source;
+            this.target = target;
           }
+        }
 
-          function dragstarted(d) {
-            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x, d.fy = d.y;
-          }
+        d3.select(document).selectAll("Link").each(function() {
+          connections.push(new Connection(
+            this.getAttribute("End1Id"),
+            this.getAttribute("End2Id")
+          ))
+        })
 
-          function dragged(d) {
-            d.fx = d3.event.x, d.fy = d3.event.y;
-          }
+        console.log(entities)
+        console.log(connections)
 
-          function dragended(d) {
-            if (!d3.event.active) simulation.alphaTarget(0);
-            d.fx = null, d.fy = null;
-          }
-          </script>
+
+        // ✔️ 01 Laad enkel de Entities in als nodes & leg links
+        // 02 Leg links tussen de Entities
+        // ✔️ 03 Zet attribute tags om in attributes/properties van de nodes
+        let nodes = entities
+            links = connections
+
+        link = link.data(links).enter().append("line");
+
+        node = node.data(nodes).enter().append("circle")
+            .attr("r", function(d) { return radius(d.textContent) || 5; })
+            .call(drag);
+
+        node.append("title")
+            .text(function(d) { return d.label || d.id; });
+
+
+        simulation.nodes(nodes);
+        simulation.force("link").links(links);
+        simulation.restart();
+      });
+
+      function ticked() {
+        link
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        node
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+      }
+
+      function dragstarted(d) {
+        if (!d3.event.active) simulation.alphaTarget(.2).restart();
+        d.fx = d.x, d.fy = d.y;
+      }
+
+      function dragged(d) {
+        d.fx = d3.event.x, d.fy = d3.event.y;
+      }
+
+      function dragended(d) {
+        if (!d3.event.active) simulation.alphaTarget(0);
+        d.fx = null, d.fy = null;
+      }
+      </script>
   </body>
 </html>
