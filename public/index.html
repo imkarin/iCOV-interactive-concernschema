@@ -5,25 +5,22 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+        manifest.json provides metadata used when your web app is installed on a
+        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+      -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+        Notice the use of %PUBLIC_URL% in the tags above.
+        It will be replaced with the URL of the `public` folder during the build.
+        Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+        work correctly both with client-side routing and a non-root public URL.
+        Learn how to configure a non-root public URL by running `npm run build`.
+      -->
     <title>React App</title>
   </head>
 
@@ -31,90 +28,106 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+        This HTML file is a template.
+        If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        You can add webfonts, meta tags, or analytics to this file.
+        The build step will place the bundled scripts into the <body> tag.
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        To begin the development, run `npm start` or `yarn start`.
+        To create a production bundle, use `npm run build` or `yarn build`.
+      -->
 
     <svg width="2000" height="1000"></svg>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <script>
+      var nodes = {};
+
       var svg = d3.select("svg"),
-          width = +svg.attr("width"),
-          height = +svg.attr("height");
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+      var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function(d) { return d.id; }))
+        .force("charge", d3.forceManyBody())
+        .force("center", d3.forceCenter(width / 2, height / 2));
 
       var radius = d3.scaleSqrt()
-          .domain([0, 20000])
-          .range([0, 20]);
+        .domain([0, 20000])
+        .range([0, 20]);
 
       var link = svg.append("g")
-          .attr("class", "link")
-          .selectAll("line");
+        .attr("class", "link")
+        .attr("stroke", "#999")
+        .attr("stroke-width", .4)
+        .attr("stroke-opacity", 1)
+        .selectAll("line")
 
       var node = svg.append("g")
-          .attr("class", "node")
+        // .on("click", click)
+        .attr("class", "node")
+        .attr("fill", nodeColor)
         .selectAll("circle");
 
       var drag = d3.drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended);
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
 
       var simulation = d3.forceSimulation()
-          .force("link", d3.forceLink().id((d) => { return d.entityId }))
-          .force("charge", d3.forceManyBody().strength(-75))
-          .force("center", d3.forceCenter(width / 2, height / 2))
-          .on("tick", ticked)
-          .stop();
+        .force("link", d3.forceLink().id((d) => {
+          return d.entityId
+        }))
+        .force("charge", d3.forceManyBody().strength(-75))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .on("tick", ticked)
+        .stop();
 
-      d3.xml("flare.xml", function(error, document) {
+      d3.xml("flare.xml", function (error, document) {
         if (error) throw error;
 
         let entities = [];
         class Entity {
           constructor(
-          label,
-          description,
-          entityId,
-          identity,
-          labelIsIdentity,
-          city,
-          country,
-          dateOfBirth,
-          dateOfDeath,
-          departmentId,
-          departmentName,
-          edgeLabel,
-          edgeNotes1,
-          edgeNotes2,
-          firstName,
-          fromDate,
-          id,
-          lastName,
-          locationId,
-          managerId,
-          notes1,
-          notes2,
-          notities1,
-          notities2,
-          numberOfStaff,
-          postalCode,
-          sex,
-          streetAddress,
-          toDate,
-          type,
-          icovNodeId,
-          icovNodeType,
-          icovNodeSubtype,
-          icovNodeOrFlag,
-          icovNodeKey,
-          icovAditumQuery,
+            label,
+            description,
+            entityId,
+            identity,
+            labelIsIdentity,
+            city,
+            country,
+            dateOfBirth,
+            dateOfDeath,
+            departmentId,
+            departmentName,
+            edgeLabel,
+            edgeNotes1,
+            edgeNotes2,
+            firstName,
+            fromDate,
+            id,
+            lastName,
+            locationId,
+            managerId,
+            notes1,
+            notes2,
+            notities1,
+            notities2,
+            numberOfStaff,
+            postalCode,
+            sex,
+            streetAddress,
+            toDate,
+            type,
+            icovNodeId,
+            icovNodeType,
+            icovNodeSubtype,
+            icovNodeOrFlag,
+            icovNodeKey,
+            icovAditumQuery,
+            group
           ) {
             this.label = label;
             this.description = description;
@@ -122,40 +135,41 @@
             this.identity = identity;
             this.labelIsIdentity = labelIsIdentity;
             this.city = city,
-            this.country = country,
-            this.dateOfBirth = dateOfBirth,
-            this.dateOfDeath = dateOfDeath,
-            this.departmentId = departmentId,
-            this.departmentName = departmentName,
-            this.edgeLabel = edgeLabel,
-            this.edgeNotes1 = edgeNotes1,
-            this.edgeNotes2 = edgeNotes2,
-            this.firstName = firstName,
-            this.fromDate = fromDate,
-            this.id = id,
-            this.lastName = lastName,
-            this.locationId = locationId,
-            this.managerId = managerId,
-            this.notes1 = notes1,
-            this.notes2 = notes2,
-            this.notities1 = notities1,
-            this.notities2 = notities2,
-            this.numberOfStaff = numberOfStaff,
-            this.postalCode = postalCode,
-            this.sex = sex,
-            this.streetAddress = streetAddress,
-            this.toDate = toDate,
-            this.type = type,
-            this.icovNodeId = icovNodeId,
-            this.icovNodeType = icovNodeType,
-            this.icovNodeSubtype = icovNodeSubtype,
-            this.icovNodeOrFlag = icovNodeOrFlag,
-            this.icovNodeKey = icovNodeKey,
-            this.icovAditumQuery = icovAditumQuery
+              this.country = country,
+              this.dateOfBirth = dateOfBirth,
+              this.dateOfDeath = dateOfDeath,
+              this.departmentId = departmentId,
+              this.departmentName = departmentName,
+              this.edgeLabel = edgeLabel,
+              this.edgeNotes1 = edgeNotes1,
+              this.edgeNotes2 = edgeNotes2,
+              this.firstName = firstName,
+              this.fromDate = fromDate,
+              this.id = id,
+              this.lastName = lastName,
+              this.locationId = locationId,
+              this.managerId = managerId,
+              this.notes1 = notes1,
+              this.notes2 = notes2,
+              this.notities1 = notities1,
+              this.notities2 = notities2,
+              this.numberOfStaff = numberOfStaff,
+              this.postalCode = postalCode,
+              this.sex = sex,
+              this.streetAddress = streetAddress,
+              this.toDate = toDate,
+              this.type = type,
+              this.icovNodeId = icovNodeId,
+              this.icovNodeType = icovNodeType,
+              this.icovNodeSubtype = icovNodeSubtype,
+              this.icovNodeOrFlag = icovNodeOrFlag,
+              this.icovNodeKey = icovNodeKey,
+              this.icovAditumQuery = icovAditumQuery,
+              this.group = group
           }
         }
 
-        d3.select(document).selectAll("Entity").each(function() {
+        d3.select(document).selectAll("Entity").each(function () {
           const rawAttributes = this.closest("ChartItem").getElementsByTagName("Attribute")
           let attributes = {}
 
@@ -163,7 +177,7 @@
             const AttributeName = attr.getAttribute("AttributeClassReference")
             const AttributeValue = attr.getAttribute("Value")
             attributes[AttributeName] = AttributeValue
-            })
+          })
 
           entities.push(new Entity(
             this.closest("ChartItem").getAttribute("Label"),
@@ -201,8 +215,9 @@
             attributes.iCOV_node_subtype,
             attributes.iCOV_node_or_flag,
             attributes.iCOV_node_key,
-            attributes.iCOV_Aditum_Query
-            ));
+            attributes.iCOV_Aditum_Query,
+            Math.ceil(Math.random() * 3)
+          ));
         })
 
         let connections = []
@@ -220,41 +235,89 @@
           ))
         })
 
-        console.log(entities)
-        console.log(connections)
-
+        // console.log(entities)
+        // console.log(connections)
 
         // ✔️ 01 Laad enkel de Entities in als nodes & leg links
-        // 02 Leg links tussen de Entities
+        // ✔️ 02 Leg links tussen de Entities
         // ✔️ 03 Zet attribute tags om in attributes/properties van de nodes
         let nodes = entities
             links = connections
 
-        link = link.data(links).enter().append("line");
+        link = link.data(links).enter().append("line")
+          .attr("clicked", "false");
 
         node = node.data(nodes).enter().append("circle")
-            .attr("r", function(d) { return radius(d.textContent) || 5; })
-            .call(drag);
+          .attr("r", (d) => { return radius(d.textContent) || 5 })
+          .attr("clicked", "false")
+          .call(drag)
+          .on("click", click)
 
         node.append("title")
-            .text(function(d) { return d.label || d.id; });
-
+          .text(function (d) {
+            return d.label || d.id;
+          });
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
         simulation.restart();
       });
 
+      // Functions that handle events
+      function nodeColor(d) {
+        const scale = d3.scaleOrdinal(d3.schemeCategory10);
+        return "#777eee";
+      }
+
+      function click() {
+        if (this.getAttribute("clicked") == "true") {
+          d3.select(this)
+          .transition()
+            .duration(500)
+            .attr("r", 5)
+            .attr("clicked", "false");
+
+            d3.selectAll("[clicked=false]").transition()
+            .duration(500)
+            .style("opacity", "1");
+            return
+        }
+
+        d3.select(this)
+        .each((d) => console.log(d.label, d.sex, d.dateOfBirth))
+        .attr("clicked", "true")
+        .transition()
+          .duration(500)
+          .attr("r", 30)
+          .style("opacity", "1");
+
+        d3.selectAll("[clicked=false]").transition()
+          .duration(500)
+          .style("opacity", ".3");
+      }
+
       function ticked() {
         link
-            .attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
+          .attr("x1", function (d) {
+            return d.source.x;
+          })
+          .attr("y1", function (d) {
+            return d.source.y;
+          })
+          .attr("x2", function (d) {
+            return d.target.x;
+          })
+          .attr("y2", function (d) {
+            return d.target.y;
+          });
 
         node
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; });
+          .attr("cx", function (d) {
+            return d.x;
+          })
+          .attr("cy", function (d) {
+            return d.y;
+          });
       }
 
       function dragstarted(d) {
@@ -270,6 +333,6 @@
         if (!d3.event.active) simulation.alphaTarget(0);
         d.fx = null, d.fy = null;
       }
-      </script>
+    </script>
   </body>
 </html>
