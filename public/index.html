@@ -65,7 +65,7 @@
         .selectAll("line")
 
       let node = svg.append("g")
-        // .attr("class", "node")
+        .attr("class", "node")
         .selectAll("circle");
 
       let drag = d3.drag()
@@ -239,8 +239,8 @@
           .attr("r", (d) => { return radius(d.textContent) || 5 })
           .attr("fill", nodeColor)
           .attr("clicked", "false")
-          .call(drag)
           .on("click", click)
+          .call(drag);
 
         node.append("title")
           .text(function (d) {
@@ -254,7 +254,7 @@
 
       // Functions that handle events
       function nodeColor() {
-        return "red";
+        return "#23affa";
       }
 
       function click() {
