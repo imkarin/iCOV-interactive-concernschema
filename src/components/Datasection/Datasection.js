@@ -21,7 +21,7 @@ class Datasection extends Component {
 
     let simulation = d3.forceSimulation()
       .force("link", d3.forceLink().id((d) => { return d.entityId }))
-      .force("charge", d3.forceManyBody().strength(-75))
+      .force("charge", d3.forceManyBody().strength(-125))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .on("tick", ticked)
       .stop();
@@ -284,25 +284,27 @@ class Datasection extends Component {
 
     function dragstarted(d) {
       if (!d3.event.active) simulation.alphaTarget(.2).restart();
-      // d.fx = d.x, d.fy = d.y;
+      d.fx = d.x;
+      d.fy = d.y;
     }
 
     function dragged(d) {
-      // d.fx = d3.event.x, d.fy = d3.event.y;
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
     }
 
     function dragended(d) {
-      if (!d3.event.active) simulation.alphaTarget(0);
-      // d.fx = null, d.fy = null;
+      if (!d3.event.active) {
+        simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
     }
   }
 
-
   render() {
     return (
-      <div className="Datasection" ref={this.myRef}>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-      </div>
+      <div className="Datasection" ref={this.myRef}></div>
     );
   }
 }
