@@ -41,6 +41,10 @@ class Datasection extends Component {
       .attr("class", "node")
       .selectAll("circle");
 
+    let nodeLabel = svg.append("g")
+      .attr("class", "nodeLabel")
+      .selectAll("text");
+
     let drag = d3.drag()
       .on("start", dragstarted)
       .on("drag", dragged)
@@ -202,16 +206,14 @@ class Datasection extends Component {
           .attr("clicked", "false");
 
         node = node.data(nodes).enter().append("circle")
-          .attr("r", (d) => { return radius(d.textContent) || 5 })
+          .attr("r", (d) => { return 5 })
           .attr("fill", nodeColor)
           .attr("clicked", "false")
           .on("click", click)
           .call(drag);
 
-        node.append("title")
-          .text(function (d) {
-            return d.label || d.id;
-          });
+        nodeLabel = nodeLabel.data(nodes).enter().append("text")
+          .text(function(d) { return d.label })
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
@@ -269,12 +271,15 @@ class Datasection extends Component {
         });
 
       node
-        .attr("cx", function (d) {
-          return d.x;
-        })
-        .attr("cy", function (d) {
-          return d.y;
+        .attr("transform", function (d) {
+          return "translate(" + d.x + "," + d.y + ")";
         });
+
+      nodeLabel
+        .attr("transform", function (d) {
+          return "translate(" + d.x + "," + d.y + ")";
+        });
+
     }
 
     function dragstarted(d) {

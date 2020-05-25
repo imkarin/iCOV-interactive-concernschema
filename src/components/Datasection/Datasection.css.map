@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,YAAa,CACX,OAAO,CAAE,mBAAmB",
+"mappings": "AAAA,YAAa,CACX,OAAO,CAAE,mBAAmB,CAE5B,iBAAK,CACH,SAAS,CAAE,GAAG,CACd,OAAO,CAAE,EAAE",
 "sources": ["Datasection.scss"],
 "names": [],
 "file": "Datasection.css"
