@@ -16,8 +16,7 @@ class Datasection extends Component {
 
     const svg = dataSection.append("svg")
       .attr("width", width)
-      .attr("height", height)
-      .style("background-color", "#f7f7f7");
+      .attr("height", height);
 
     let simulation = d3.forceSimulation()
       .force("link", d3.forceLink().id((d) => { return d.entityId }))
