@@ -11,9 +11,11 @@
      overflow: hidden;
 }
 
+.App .Filtersection{background-color: hotpink;}
+
 .App a {
      text-decoration: none;
-     color: #5a5a5a
+
 }
 
 .App ul,
@@ -28,7 +30,10 @@
 /*# sourceMappingURL=App.css.map */
 
 .App .Datasection {
-     background-color: #1e1e1e;
+     /*background-color: #1e1e1e;*/
+     background-color: #fff;
+
+  
      
      width: 100vw;
      height: 100vh;
@@ -46,3 +51,21 @@
 
 
 
+
+div.tooltip {	
+     position: absolute;			
+     text-align: center;			
+     min-width: 400px;					
+     min-height: 200px;					
+     padding: 2px;				
+     font: 12px sans-serif;		
+     background: #458ab2;	
+     border: 0px;		
+     border-radius: 15px;			
+     pointer-events: none;
+     color: #fff;		
+ }
+
+ div.tooltip h1{color:#fff}
+
+ div.toolip p{text-align: left; font-size: 30px;}

@@ -14,10 +14,10 @@ class Datasection extends Component {
     const width = 1500,
     height = 1250;
 
-    //load colorscheme
+    // Load colorscheme
     const color = d3.scaleOrdinal(d3.schemeBlues[5]);
 
-    //create networkchain container (svg) and give it a zoom functionality
+    // Create networkchain container (svg) and give it a zoom functionality
     const svg = dataSection.append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
@@ -25,7 +25,7 @@ class Datasection extends Component {
        svg.attr("transform", d3.event.transform)
       }))
       .append("g")
-  
+
     let simulation = d3.forceSimulation()
       .force("link", d3.forceLink().id((d) => { return d.entityId }))
       .force("charge", d3.forceManyBody().strength(-1000))
@@ -47,6 +47,10 @@ class Datasection extends Component {
     let nodeLabel = svg.append("g")
       .attr("class", "nodeLabel")
       .selectAll("text");
+
+    let div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
     let drag = d3.drag()
       .on("start", dragstarted)
@@ -209,8 +213,21 @@ class Datasection extends Component {
           .attr("clicked", "false");
 
         node = node.data(nodes).enter().append("circle")
-          .attr("r", (d) => { return 20})
+          .attr("r", 20)
           .attr("fill", nodeColor)
+        .on("mouseover", function(d) {
+          div.transition()
+              .duration(100)
+              .style("opacity", .9);
+          div.html( "<h1>" + d.label + "</h1>" + "<h2>" + d.sex + "</h2>" + "<p>" + d.dateOfBirth + "</p>"+ d.close)
+              .style("left", (d3.event.pageX) + "px")
+              .style("top", (d3.event.pageY - 50) + "px");
+        })
+        .on("mouseout", function(d) {
+          div.transition()
+              .duration(100)
+              .style("opacity", 0);
+        })
           .attr("clicked", "false")
           .on("click", click)
           .call(drag);
@@ -221,19 +238,9 @@ class Datasection extends Component {
           .attr("text-anchor", "middle")
           .attr("dx", 0)
           .attr("dy", "35px")
-          .style("fill", "#fff")
-          .text(function(d) {
-              return d.label;
-          }).call(getBB);
-
-        nodeLabel.insert("rect","text")
-          .attr("width", function(d){return d.bbox.width})
-          .attr("height", function(d){return d.bbox.height})
-          .style("fill", "hotpink");
-    
-    function getBB(selection) {
-        selection.each(function(d){d.bbox = this.getBBox();})
-    }
+          .style("fill", "#000")
+          .text((d) => { return d.label })
+          .call(getBB)
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
@@ -254,7 +261,7 @@ class Datasection extends Component {
         .transition()
           .duration(10)
           .attr("r", 20)
-          .attr("clicked", "false");
+          .attr("clicked", "false")
 
           d3.selectAll("[clicked=false]").transition()
           .duration(10)
@@ -266,12 +273,12 @@ class Datasection extends Component {
       .each((d) => console.log(d.label, d.sex, d.dateOfBirth))
       .attr("clicked", "true")
       .transition()
-        .duration(10)
-        .attr("r", 30)
+        .duration(30)
+        .attr("r", 50)
         .style("opacity", "1");
 
       d3.selectAll("[clicked=false]").transition()
-        .duration(10)
+        .duration(30)
         .style("opacity", ".3");
     }
 
@@ -319,6 +326,10 @@ class Datasection extends Component {
         d.fx = null;
         d.fy = null;
       }
+    }
+
+    function getBB(selection) {
+      selection.each(function(d){d.bbox = this.getBBox();})
     }
   }
 
