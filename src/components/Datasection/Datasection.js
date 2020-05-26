@@ -14,25 +14,29 @@ class Datasection extends Component {
     const width = 1500,
     height = 1250;
 
-    const svg = dataSection.append("svg")
-      .attr("width", width)
-      .attr("height", height);
+    //load colorscheme
+    const color = d3.scaleOrdinal(d3.schemeBlues[5]);
 
+    //create networkchain container (svg) and give it a zoom functionality
+    const svg = dataSection.append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .call(d3.zoom().on("zoom", function () {
+       svg.attr("transform", d3.event.transform)
+      }))
+      .append("g")
+  
     let simulation = d3.forceSimulation()
       .force("link", d3.forceLink().id((d) => { return d.entityId }))
-      .force("charge", d3.forceManyBody().strength(-125))
+      .force("charge", d3.forceManyBody().strength(-1000))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .on("tick", ticked)
       .stop();
 
-    let radius = d3.scaleSqrt()
-      .domain([0, 20000])
-      .range([0, 20]);
-
     let link = svg.append("g")
       .attr("class", "link")
       .attr("stroke", "#999")
-      .attr("stroke-width", .4)
+      .attr("stroke-width", .99)
       .attr("stroke-opacity", 1)
       .selectAll("line");
 
@@ -205,14 +209,31 @@ class Datasection extends Component {
           .attr("clicked", "false");
 
         node = node.data(nodes).enter().append("circle")
-          .attr("r", (d) => { return 5 })
+          .attr("r", (d) => { return 20})
           .attr("fill", nodeColor)
           .attr("clicked", "false")
           .on("click", click)
           .call(drag);
 
         nodeLabel = nodeLabel.data(nodes).enter().append("text")
-          .text(function(d) { return d.label })
+          .attr("class", "text")
+          .attr("clicked", "false")
+          .attr("text-anchor", "middle")
+          .attr("dx", 0)
+          .attr("dy", "35px")
+          .style("fill", "#fff")
+          .text(function(d) {
+              return d.label;
+          }).call(getBB);
+
+        nodeLabel.insert("rect","text")
+          .attr("width", function(d){return d.bbox.width})
+          .attr("height", function(d){return d.bbox.height})
+          .style("fill", "hotpink");
+    
+    function getBB(selection) {
+        selection.each(function(d){d.bbox = this.getBBox();})
+    }
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
@@ -223,20 +244,20 @@ class Datasection extends Component {
     })
 
      // Functions that handle events
-     function nodeColor() {
-      return "#23affa";
+     function nodeColor(d) {
+      return color(d.group);
     }
 
     function click() {
       if (this.getAttribute("clicked") === "true") {
         d3.select(this)
         .transition()
-          .duration(500)
-          .attr("r", 5)
+          .duration(10)
+          .attr("r", 20)
           .attr("clicked", "false");
 
           d3.selectAll("[clicked=false]").transition()
-          .duration(500)
+          .duration(10)
           .style("opacity", "1");
           return
       }
@@ -245,12 +266,12 @@ class Datasection extends Component {
       .each((d) => console.log(d.label, d.sex, d.dateOfBirth))
       .attr("clicked", "true")
       .transition()
-        .duration(500)
+        .duration(10)
         .attr("r", 30)
         .style("opacity", "1");
 
       d3.selectAll("[clicked=false]").transition()
-        .duration(500)
+        .duration(10)
         .style("opacity", ".3");
     }
 
