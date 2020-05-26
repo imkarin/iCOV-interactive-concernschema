@@ -46,7 +46,7 @@ class Datasection extends Component {
       .attr("class", "nodeLabel")
       .selectAll("text");
 
-    let div = d3.select("body").append("div")
+    let detailsPopup = dataSection.append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
 
@@ -318,16 +318,31 @@ class Datasection extends Component {
     }
 
     function showNodeDetails(d) {
-      div.transition()
-          .duration(100)
-          .style("opacity", .9);
-      div.html( "<h1>" + d.label + "</h1>" + "<h2>" + d.sex + "</h2>" + "<p>" + d.dateOfBirth + "</p>"+ d.close)
-          .style("left", (d3.event.pageX) + "px")
-          .style("top", (d3.event.pageY - 50) + "px");
+      detailsPopup
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY - 20) + "px")
+        .transition()
+        .duration(100)
+        .style("opacity", .9);
+
+      // define details in popup
+      if(d.icovNodeType == "PEOPLE") {
+        detailsPopup
+          .html("<h3>" + d.label + "</h3>" + "<h4>" + d.sex.toLowerCase() + "</h4>" + "<p>" + d.dateOfBirth + "</p>")
+      } else if(d.icovNodeType == "ADDRESS") {
+        detailsPopup
+          .html("<h3>" + d.label + "</h3>" + "<h4>" + d.city + ", " + d.country + "</h4>" + "<p>" + d.streetAddress + ", " + d.postalCode + "</p>")
+      } else if(d.icovNodeType == "DEPARTMENT") {
+        detailsPopup
+          .html("<h3>" + d.label + "</h3>" + "<h4> Department name: " + d.departmentName + "</h4>" + "<p>" + d.streetAddress + ", " + d.postalCode + "</p>")
+      } else {
+        detailsPopup
+          .html("")
+      }
     }
 
     function hideNodeDetails(d) {
-      div.transition()
+      detailsPopup.transition()
           .duration(100)
           .style("opacity", 0);
     }
