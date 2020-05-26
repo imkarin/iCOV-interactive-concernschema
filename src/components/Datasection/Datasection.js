@@ -137,6 +137,8 @@ class Datasection extends Component {
           }
         }
 
+        const groups = ["PEOPLE", "DEPARTMENT", "ADDRESS"];
+
         d3.select(document).selectAll("Entity").each(function() {
           const rawAttributes = this.closest("ChartItem").getElementsByTagName("Attribute")
           let attributes = {}
@@ -184,10 +186,11 @@ class Datasection extends Component {
             attributes.iCOV_node_or_flag,
             attributes.iCOV_node_key,
             attributes.iCOV_Aditum_Query,
-            Math.ceil(Math.random() * 3)
+            groups.findIndex((group) => group === attributes.iCOV_node_type) + 1
           ));
         })
 
+        console.log(entities)
         let connections = []
         class Connection {
           constructor(source, target) {
@@ -256,7 +259,6 @@ class Datasection extends Component {
       }
 
       d3.select(this)
-      .each((d) => console.log(d.label, d.sex, d.dateOfBirth))
       .attr("clicked", "true")
       .transition()
         .duration(30)
