@@ -14,17 +14,17 @@ class Datasection extends Component {
     const width = 1500,
     height = 1250;
 
-    //kleurenschema inladen
-    var color = d3.scaleOrdinal(d3.schemeBlues[5]);
+    //load colorscheme
+    const color = d3.scaleOrdinal(d3.schemeBlues[5]);
 
-    //zoom functie
+    //create networkchain container (svg) and give it a zoom functionality
     const svg = dataSection.append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
     .call(d3.zoom().on("zoom", function () {
        svg.attr("transform", d3.event.transform)
-    }))
-    .append("g")
+      }))
+      .append("g")
   
     let simulation = d3.forceSimulation()
       .force("link", d3.forceLink().id((d) => { return d.entityId }))
@@ -33,7 +33,6 @@ class Datasection extends Component {
       .on("tick", ticked)
       .stop();
 
-      
     let link = svg.append("g")
       .attr("class", "link")
       .attr("stroke", "#999")
@@ -47,8 +46,6 @@ class Datasection extends Component {
 
     let nodeLabel = svg.append("g")
       .attr("class", "nodeLabel")
-
-      .attr("fill", "#fff")
       .selectAll("text");
 
     let drag = d3.drag()
@@ -212,30 +209,27 @@ class Datasection extends Component {
           .attr("clicked", "false");
 
         node = node.data(nodes).enter().append("circle")
-        
           .attr("r", (d) => { return 20})
-          .attr("fill", function (d) {
-          return color(d.group);
-        })
-       
+          .attr("fill", nodeColor)
           .attr("clicked", "false")
           .on("click", click)
           .call(drag);
 
         nodeLabel = nodeLabel.data(nodes).enter().append("text")
-        .attr("class", "text")
-        .attr("clicked", "false")
-        .attr("text-anchor", "middle")
-        .attr("dx", 0)
-        .attr("dy", "35px")
-        .style("fill", "#fff")
-        .text(function(d) {
-            return d.label;
-        }).call(getBB);   
-    nodeLabel.insert("rect","text")
-        .attr("width", function(d){return d.bbox.width})
-        .attr("height", function(d){return d.bbox.height})
-        .style("fill", "hotpink");
+          .attr("class", "text")
+          .attr("clicked", "false")
+          .attr("text-anchor", "middle")
+          .attr("dx", 0)
+          .attr("dy", "35px")
+          .style("fill", "#fff")
+          .text(function(d) {
+              return d.label;
+          }).call(getBB);
+
+        nodeLabel.insert("rect","text")
+          .attr("width", function(d){return d.bbox.width})
+          .attr("height", function(d){return d.bbox.height})
+          .style("fill", "hotpink");
     
     function getBB(selection) {
         selection.each(function(d){d.bbox = this.getBBox();})
@@ -250,8 +244,8 @@ class Datasection extends Component {
     })
 
      // Functions that handle events
-     function nodeColor() {
-      return "#23affa";
+     function nodeColor(d) {
+      return color(d.group);
     }
 
     function click() {
