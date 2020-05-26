@@ -19,11 +19,9 @@ class Datasection extends Component {
 
     // Create networkchain container (svg) and give it a zoom functionality
     const svg = dataSection.append("svg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .call(d3.zoom().on("zoom", function () {
-       svg.attr("transform", d3.event.transform)
-      }))
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .call(d3.zoom().on("zoom", () => svg.attr("transform", d3.event.transform)))
       .append("g")
 
     let simulation = d3.forceSimulation()
@@ -57,8 +55,7 @@ class Datasection extends Component {
       .on("drag", dragged)
       .on("end", dragended);
 
-    d3.xml(data)
-    .then((document) => {
+    d3.xml(data).then((document) => {
       let entities = [];
         class Entity {
           constructor(
@@ -140,7 +137,7 @@ class Datasection extends Component {
           }
         }
 
-        d3.select(document).selectAll("Entity").each(function () {
+        d3.select(document).selectAll("Entity").each(function() {
           const rawAttributes = this.closest("ChartItem").getElementsByTagName("Attribute")
           let attributes = {}
 
@@ -215,19 +212,8 @@ class Datasection extends Component {
         node = node.data(nodes).enter().append("circle")
           .attr("r", 20)
           .attr("fill", nodeColor)
-        .on("mouseover", function(d) {
-          div.transition()
-              .duration(100)
-              .style("opacity", .9);
-          div.html( "<h1>" + d.label + "</h1>" + "<h2>" + d.sex + "</h2>" + "<p>" + d.dateOfBirth + "</p>"+ d.close)
-              .style("left", (d3.event.pageX) + "px")
-              .style("top", (d3.event.pageY - 50) + "px");
-        })
-        .on("mouseout", function(d) {
-          div.transition()
-              .duration(100)
-              .style("opacity", 0);
-        })
+          .on("mouseover", showNodeDetails)
+          .on("mouseout", hideNodeDetails)
           .attr("clicked", "false")
           .on("click", click)
           .call(drag);
@@ -306,7 +292,6 @@ class Datasection extends Component {
         .attr("transform", function (d) {
           return "translate(" + d.x + "," + d.y + ")";
         });
-
     }
 
     function dragstarted(d) {
@@ -330,6 +315,21 @@ class Datasection extends Component {
 
     function getBB(selection) {
       selection.each(function(d){d.bbox = this.getBBox();})
+    }
+
+    function showNodeDetails(d) {
+      div.transition()
+          .duration(100)
+          .style("opacity", .9);
+      div.html( "<h1>" + d.label + "</h1>" + "<h2>" + d.sex + "</h2>" + "<p>" + d.dateOfBirth + "</p>"+ d.close)
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 50) + "px");
+    }
+
+    function hideNodeDetails(d) {
+      div.transition()
+          .duration(100)
+          .style("opacity", 0);
     }
   }
 
