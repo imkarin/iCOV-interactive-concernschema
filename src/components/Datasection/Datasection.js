@@ -17,6 +17,9 @@ class Datasection extends Component {
     //kleurenschema inladen
     var color = d3.scaleOrdinal(d3.schemeBlues[5]);
 
+
+
+    
     //zoom functie
     const svg = dataSection.append("svg")
     .attr("width", "100%")
@@ -217,10 +220,49 @@ class Datasection extends Component {
           .attr("fill", function (d) {
           return color(d.group);
         })
+
+
+
+
+
+
+
+
+
+
+
+
+        .on("mouseover", function(d) {		
+          div.transition()		
+              .duration(100)		
+              .style("opacity", .9);		
+          div	.html( "<h1>" + d.label + "</h1>" + "<h2>" + d.sex + "</h2>" + "<p>" + d.dateOfBirth + "</p>"+ d.close)	
+              .style("left", (d3.event.pageX) + "px")		
+              .style("top", (d3.event.pageY - 50) + "px");	
+        })			
+          
+          
+        .on("mouseout", function(d) {		
+          div.transition()		
+              .duration(100)		
+              .style("opacity", 0);	
+        })
        
           .attr("clicked", "false")
           .on("click", click)
           .call(drag);
+
+
+
+
+
+
+
+
+
+
+
+
 
         nodeLabel = nodeLabel.data(nodes).enter().append("text")
         .attr("class", "text")
@@ -228,18 +270,32 @@ class Datasection extends Component {
         .attr("text-anchor", "middle")
         .attr("dx", 0)
         .attr("dy", "35px")
-        .style("fill", "#fff")
+        
+        .style("fill", "#000")
         .text(function(d) {
             return d.label;
-        }).call(getBB);   
+        }).call(getBB)
+           
     nodeLabel.insert("rect","text")
         .attr("width", function(d){return d.bbox.width})
         .attr("height", function(d){return d.bbox.height})
         .style("fill", "hotpink");
-    
+
+      
     function getBB(selection) {
         selection.each(function(d){d.bbox = this.getBBox();})
     }
+
+
+
+    var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
+
+
+
+
+
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
@@ -249,10 +305,6 @@ class Datasection extends Component {
       throw err
     })
 
-     // Functions that handle events
-     function nodeColor() {
-      return "#23affa";
-    }
 
     function click() {
       if (this.getAttribute("clicked") === "true") {
@@ -260,7 +312,9 @@ class Datasection extends Component {
         .transition()
           .duration(10)
           .attr("r", 20)
-          .attr("clicked", "false");
+          .attr("clicked", "false")
+          
+          
 
           d3.selectAll("[clicked=false]").transition()
           .duration(10)
@@ -272,14 +326,87 @@ class Datasection extends Component {
       .each((d) => console.log(d.label, d.sex, d.dateOfBirth))
       .attr("clicked", "true")
       .transition()
-        .duration(10)
-        .attr("r", 30)
+        .duration(30)
+        .attr("r", 50)
         .style("opacity", "1");
 
       d3.selectAll("[clicked=false]").transition()
-        .duration(10)
+        .duration(30)
         .style("opacity", ".3");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     function ticked() {
       link
