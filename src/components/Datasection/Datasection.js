@@ -334,7 +334,7 @@ class Datasection extends Component {
           .html("<h3>" + d.label + "</h3>" + "<h4>" + d.city + ", " + d.country + "</h4>" + "<p>" + d.streetAddress + ", " + d.postalCode + "</p>")
       } else if(d.icovNodeType == "DEPARTMENT") {
         detailsPopup
-          .html("<h3>" + d.label + "</h3>" + "<h4> Department name: " + d.departmentName + "</h4>" + "<p>" + d.streetAddress + ", " + d.postalCode + "</p>")
+          .html("<h3>" + d.label + "</h3>" + "<h4> Department name: " + d.departmentName + "</h4>")
       } else {
         detailsPopup
           .html("")
