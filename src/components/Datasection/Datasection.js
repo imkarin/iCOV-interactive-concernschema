@@ -9,21 +9,40 @@ class Datasection extends Component {
     this.myRef = React.createRef();
   }
 
+  // Update data with applied filters
   componentDidUpdate() {
-    // Show props (filters) after they're updated
-    console.log(this.props)
+    const newFilters = this.props.filters
+
+    d3.selectAll("circle").filter((d) => { return !newFilters.includes(d.icovNodeType) })
+    .transition()
+    .duration(300)
+    .style("opacity", .3);
+
+    d3.selectAll("circle").filter((d) => { return newFilters.includes(d.icovNodeType) })
+    .transition()
+    .duration(300)
+    .style("opacity", 1);
+
+    d3.selectAll("line")
+      .transition()
+      .duration(300)
+      .style("opacity", lineOpacity);
+
+    // Function declarations
+    function lineOpacity() {
+      if (newFilters.length === 3) {
+        return 1;
+      } else {
+        return .1;
+      }
+    }
   }
 
+// Load initial data (no filters applied)
   componentDidMount() {
-    // Show initial props (filters)
-    console.log(this.props)
-
     let dataSection = d3.select(this.myRef.current);
     const width = 1500,
     height = 1250;
-
-    // Load colorscheme
-    const color = d3.scaleOrdinal(d3.schemeBlues[5]);
 
     // Create networkchain container (svg) and give it a zoom functionality
     const svg = dataSection.append("svg")
@@ -248,7 +267,13 @@ class Datasection extends Component {
 
      // Functions that handle events
      function nodeColor(d) {
-      return color(d.group);
+      if (d.group === 1) {
+        return "#365169"
+      } else if (d.group === 2) {
+        return "#4BA9A8"
+      } else if (d.group === 3) {
+        return "#D93E39"
+      }
     }
 
     function click() {
