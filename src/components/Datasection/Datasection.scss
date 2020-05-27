@@ -13,6 +13,13 @@
     cursor: pointer;
   }
 
+  line:hover {
+    stroke-width: 5;
+    stroke: #5f6a74;
+    transition: .2s;
+    cursor: pointer;
+  }
+
   .tooltip {
     position: absolute;
     min-width: 400px;
