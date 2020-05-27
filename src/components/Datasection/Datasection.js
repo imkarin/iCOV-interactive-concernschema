@@ -9,7 +9,15 @@ class Datasection extends Component {
     this.myRef = React.createRef();
   }
 
+  componentDidUpdate() {
+    // Show props (filters) after they're updated
+    console.log(this.props)
+  }
+
   componentDidMount() {
+    // Show initial props (filters)
+    console.log(this.props)
+
     let dataSection = d3.select(this.myRef.current);
     const width = 1500,
     height = 1250;
@@ -190,7 +198,6 @@ class Datasection extends Component {
           ));
         })
 
-        console.log(entities)
         let connections = []
         class Connection {
           constructor(source, target) {
@@ -328,15 +335,15 @@ class Datasection extends Component {
         .style("opacity", .9);
 
       // define details in popup
-      if(d.icovNodeType == "PEOPLE") {
+      if(d.icovNodeType === "PEOPLE") {
         detailsPopup
-          .html("<h3>" + d.label + "</h3>" + "<h4>" + d.sex.toLowerCase() + "</h4>" + "<p>" + d.dateOfBirth + "</p>")
-      } else if(d.icovNodeType == "ADDRESS") {
+          .html("<h3>" + d.label + "</h3><h4>" + d.sex.toLowerCase() + "</h4><p>" + d.dateOfBirth + "</p>")
+      } else if(d.icovNodeType === "ADDRESS") {
         detailsPopup
-          .html("<h3>" + d.label + "</h3>" + "<h4>" + d.city + ", " + d.country + "</h4>" + "<p>" + d.streetAddress + ", " + d.postalCode + "</p>")
-      } else if(d.icovNodeType == "DEPARTMENT") {
+          .html("<h3>" + d.label + "</h3><h4>" + d.city + ", " + d.country + "</h4><p>" + d.streetAddress + ", " + d.postalCode + "</p>")
+      } else if(d.icovNodeType === "DEPARTMENT") {
         detailsPopup
-          .html("<h3>" + d.label + "</h3>" + "<h4> Department name: " + d.departmentName + "</h4>")
+          .html("<h3>" + d.label + "</h3><h4> Department name: " + d.departmentName + "</h4>")
       } else {
         detailsPopup
           .html("")

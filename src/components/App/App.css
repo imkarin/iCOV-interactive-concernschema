@@ -1,2 +1,2 @@
-.App{position:relative;text-align:left}.App *,.App html{padding:0;margin:0;box-sizing:border-box}.App a{text-decoration:none;color:#5a5a5a}.App ul,.App ol{list-style:none}.App main{display:flex}
+.App{position:relative;text-align:left}.App *,.App html{padding:0;margin:0;box-sizing:border-box}.App a{text-decoration:none;color:#5a5a5a}.App ul,.App ol{list-style:none}.App main{display:flex}.App main button{position:absolute;top:150px;left:30px;width:150px;height:25px;padding:5px 15px;color:#FFF;background-color:#2cafe2;border:none}
 /*# sourceMappingURL=App.css.map */
