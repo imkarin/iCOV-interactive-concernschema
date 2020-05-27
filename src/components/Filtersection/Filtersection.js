@@ -1,7 +1,7 @@
 import React from 'react';
 import './Filtersection.css';
 
-const Filtersection = (props, context) => {
+const Filtersection = (props) => {
   return (
     <div className="Filtersection">
       <h1>"User"</h1>
@@ -43,12 +43,22 @@ const Filtersection = (props, context) => {
 </table>
 
 
-
       <h2>Weergave</h2>
-  <button onClick={ (e) => props.updateFilters(e) } >{props.name}</button>
+      <form>
+        <label>
+          <input type="checkbox" name="PERSON" value="PERSON" onChange={ (e) => props.update(e) } />
+          Person <br />
+        </label>
+        <label>
+          <input type="checkbox" name="ADDRESS" value="ADDRESS" onChange={ (e) => props.update(e) } />
+          Address <br />
+        </label>
+        <label>
+          <input type="checkbox" name="DEPARTMENT" value="DEPARTMENT" onChange={ (e) => props.update(e) } />
+          Department <br />
+        </label>
+      </form>
     </div>
-
-
   );
 }
 

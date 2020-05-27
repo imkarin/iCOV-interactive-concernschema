@@ -5,17 +5,27 @@ import Filtersection from '../Filtersection/Filtersection.js';
 import Datasection from '../Datasection/Datasection.js';
 
 function App() {
-  let [filters, setFilters] = useState(["PEOPLE", "ADDRESS", "DEPARTMENT"]);
+  let [filters, setFilters] = useState([]);
 
-  function updateFilters() {
-    setFilters(["PEOPLE"]);
+  function updateFilters(e) {
+    // Update the filters
+    const newFilters = [...filters]
+
+    if(e.target.checked === true) {
+      newFilters.push(e.target.name)
+      setFilters(newFilters);
+    } else if (e.target.checked === false) {
+      const itemIndex = newFilters.indexOf(e.target.name)
+      newFilters.splice(itemIndex, 1)
+      setFilters(newFilters)
+    }
   }
 
   return (
     <div className="App">
       <Header />
       <main>
-        <Filtersection updateFilters={ updateFilters } name="hi" />
+        <Filtersection update={ updateFilters } />
         <Datasection filters={ filters } />
       </main>
     </div>
