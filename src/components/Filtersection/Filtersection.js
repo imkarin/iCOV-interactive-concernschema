@@ -1,7 +1,7 @@
 import React from 'react';
 import './Filtersection.css';
 
-function Filtersection() {
+const Filtersection = (props, context) => {
   return (
     <div className="Filtersection">
       <h1>"User"</h1>
@@ -45,7 +45,10 @@ function Filtersection() {
 
 
       <h2>Weergave</h2>
+  <button onClick={ (e) => props.updateFilters(e) } >{props.name}</button>
     </div>
+
+
   );
 }
 

@@ -15,8 +15,7 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <Filtersection />
-        <button onClick={ updateFilters }>Update filters!</button>
+        <Filtersection updateFilters={ updateFilters } name="hi" />
         <Datasection filters={ filters } />
       </main>
     </div>
