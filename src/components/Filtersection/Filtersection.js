@@ -24,7 +24,7 @@ const Filtersection = (props) => {
                   </label>
                 </td>
               </tr>
-            {/* End Personen */}
+              {/* End Personen */}
 
               {/* Vastgoed */}
               <tr>
