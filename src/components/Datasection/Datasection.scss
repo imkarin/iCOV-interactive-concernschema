@@ -1,32 +1,56 @@
 .Datasection {
-  width: 100%;
-  height: 100vh;
-  background-color: #ffffff;
+	width: 100%;
+	height: 100vh;
+	background-color: #ffffff;
 
-  text {
-    font-size: 9pt;
-    font-weight: 700;
-    opacity: .9;
-  }
+	text {
+		font-size: 9pt;
+		font-weight: 700;
+		opacity: .9;
+	}
 
-  .node:hover {
-    cursor: pointer;
-  }
+	.node {
+		&:hover {
+			cursor: pointer;
+		}
+	}
 
-  .tooltip {
-    position: absolute;
-    min-width: 400px;
-    padding: 20px;
-    text-align: center;
-    font-size: .85em;
-    color: #fff;
-    background: rgba(69, 138, 178, .85);
-    border-radius: 10px;
-    pointer-events: none;
-  }
+	line:hover {
+		stroke-width: 5;
+		stroke: #5f6a74;
+		transition: .2s;
+		cursor: pointer;
+	  }
 
-  .tooltip h1, h2, h3, p {
-    padding: 10px 0;
-    color:#fff
-  }
+	.tooltip {
+		position: absolute;
+		min-width: 400px;
+		padding: 20px;
+		text-align: center;
+		font-size: .85em;
+		color: #fff;
+		background: #1e1e1e;
+		border-radius: 10px;
+		pointer-events: none;
+
+		h1 {
+			padding: 10px 0;
+			color: #fff;
+		}
+	}
+
+	h2 {
+		padding: 10px 0;
+		color: #fff;
+	}
+
+	h3 {
+		padding: 10px 0;
+		color: #fff;
+	}
+
+	p {
+		padding: 10px 0;
+		color: #fff;
+	}
 }

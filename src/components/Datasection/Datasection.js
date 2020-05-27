@@ -42,7 +42,7 @@ class Datasection extends Component {
     let link = svg.append("g")
       .attr("class", "link")
       .attr("stroke", "#999")
-      .attr("stroke-width", .99)
+      .attr("stroke-width", 2)
       .attr("stroke-opacity", 1)
       .selectAll("line");
 
