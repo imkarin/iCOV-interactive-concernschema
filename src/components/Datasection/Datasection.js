@@ -252,7 +252,6 @@ class Datasection extends Component {
           .attr("dy", "35px")
           .style("fill", "#000")
           .text((d) => { return d.label })
-          .call(getBB)
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
@@ -370,13 +369,7 @@ class Datasection extends Component {
       }
     }
 
-    function getBB(selection) {
-      selection.each(function(d){d.bbox = this.getBBox();})
-    }
 
-    function showNodeDetails(d) {
-
-    }
   }
 
   render() {
