@@ -11,18 +11,41 @@
 		opacity: .9;
 	}
 
+	circle {
+		transition: r .3s, opacity .3s;
+
+		&.bigger {
+			r: 50;
+		}
+
+		&.faded_out {
+			opacity: .3;
+		}
+
+		&.filtered_out {
+			opacity: .3;
+		}
+	}
 	.node {
 		&:hover {
 			cursor: pointer;
 		}
 	}
 
-	line:hover {
-		stroke-width: 5;
-		stroke: #445259;
-		transition: .2s;
-		cursor: pointer;
-	  }
+	line {
+		transition: opacity .3s;
+
+		&:hover {
+			stroke-width: 5;
+			stroke: #445259;
+			transition: .2s;
+			cursor: pointer;
+		}
+
+		&.filtered_out {
+			opacity: .1;
+		}
+	}
 
 	.detailsection {
 		position: absolute;
