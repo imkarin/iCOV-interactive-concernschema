@@ -268,11 +268,12 @@ class Datasection extends Component {
 
     function nodeClick(d) {
       if(this.getAttribute("clicked") === "false") {
-        // add "bigger" & "faded_out" class
-        d3.select(this)
-          .attr("clicked", "true")
+        // add "bigger" & remove "faded_out" class from clicked node
+        this.setAttribute("clicked", "true");
         this.classList.add("bigger");
+        this.classList.remove("faded_out");
 
+        // add "faded_out" class to not-clicked nodes
         document.querySelectorAll("[clicked=false]").forEach(element => {
           element.classList.add("faded_out");
         })
@@ -316,15 +317,20 @@ class Datasection extends Component {
         return
       }
 
-      // make popup with details disappear
-      d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
+      // remove "bigger" class from clicked node
+      this.setAttribute("clicked", "false");
+      this.classList.remove("bigger");
+      this.classList.add("faded_out");
 
-      // remove "bigger" & "faded_out" class
-      d3.select(this).attr("clicked", "false");
+      // remove "faded_out" class from all not-clicked nodes, if there are no clicked nodes anymore
       document.querySelectorAll("[clicked=false]").forEach(element => {
-        element.classList.remove("faded_out", "bigger");
+        if(document.querySelectorAll("[clicked=true]").length === 0) {
+          element.classList.remove("faded_out");
+        }
       })
 
+      // make popup with details disappear
+      d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
     }
 
     function showMoreDetails() {
