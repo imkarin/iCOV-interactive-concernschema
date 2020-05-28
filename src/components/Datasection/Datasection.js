@@ -14,28 +14,22 @@ class Datasection extends Component {
     const newFilters = this.props.filters
 
     d3.selectAll("circle").filter((d) => { return !newFilters.includes(d.icovNodeType) })
-    .transition()
-    .duration(300)
-    .style("opacity", .3);
+      .each(function(){
+        this.classList.add("filtered_out");
+      })
 
-    d3.selectAll("circle").filter((d) => { return newFilters.includes(d.icovNodeType) })
-    .transition()
-    .duration(300)
-    .style("opacity", 1);
+      d3.selectAll("circle").filter((d) => { return newFilters.includes(d.icovNodeType) })
+        .each(function(){
+          this.classList.remove("filtered_out");
+        })
 
-    d3.selectAll("line")
-      .transition()
-      .duration(300)
-      .style("opacity", lineOpacity);
-
-    // Function declarations
-    function lineOpacity() {
+    d3.selectAll("line").each(function(){
       if (newFilters.length === 3) {
-        return 1;
+        this.classList.remove("filtered_out");
       } else {
-        return .1;
+        this.classList.add("filtered_out");
       }
-    }
+    })
   }
 
   /* Load initial data (no filters applied) */
@@ -274,6 +268,15 @@ class Datasection extends Component {
 
     function nodeClick(d) {
       if(this.getAttribute("clicked") === "false") {
+        // add "bigger" & "faded_out" class
+        d3.select(this)
+          .attr("clicked", "true")
+        this.classList.add("bigger");
+
+        document.querySelectorAll("[clicked=false]").forEach(element => {
+          element.classList.add("faded_out");
+        })
+
         // make popup appear
         d3.select(this).attr("clicked", "true");
 
@@ -310,33 +313,18 @@ class Datasection extends Component {
           }
         }
 
-        // make node bigger
-        d3.select(this)
-        .attr("clicked", "true")
-        .transition()
-          .duration(300)
-          .attr("r", 50)
-          .style("opacity", "1");
-
-        d3.selectAll("[clicked=false]").transition()
-          .duration(30)
-          .style("opacity", ".3");
-
         return
       }
 
       // make popup with details disappear
       d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
 
-      // make node smaller
-      d3.select(this).transition()
-        .duration(300)
-        .attr("r", 20)
-        .attr("clicked", "false")
+      // remove "bigger" & "faded_out" class
+      d3.select(this).attr("clicked", "false");
+      document.querySelectorAll("[clicked=false]").forEach(element => {
+        element.classList.remove("faded_out", "bigger");
+      })
 
-      d3.selectAll("[clicked=false]").transition()
-        .duration(300)
-        .style("opacity", "1");
     }
 
     function showMoreDetails() {
@@ -347,7 +335,6 @@ class Datasection extends Component {
         d3.select(this).select("table")
           .attr("class", null);
       }
-
     }
 
     function ticked() {
