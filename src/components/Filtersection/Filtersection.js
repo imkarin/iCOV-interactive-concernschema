@@ -8,9 +8,9 @@ const Filtersection = (props) => {
     <div className="Filtersection">
 
       <section id="Userbox">
-        <h2>//Username</h2>
-        <h3>//Department</h3>
-        <h4>//Function</h4>
+        <h2>Username</h2>
+        <h3>Department</h3>
+        <h4>Function</h4>
       </section>
 
       <section id="Filterbox">
