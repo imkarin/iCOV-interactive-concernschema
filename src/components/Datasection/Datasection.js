@@ -9,7 +9,7 @@ class Datasection extends Component {
     this.myRef = React.createRef();
   }
 
-  // Update data with applied filters
+  /* Update data with applied filters */
   componentDidUpdate() {
     const newFilters = this.props.filters
 
@@ -38,13 +38,13 @@ class Datasection extends Component {
     }
   }
 
-// Load initial data (no filters applied)
+  /* Load initial data (no filters applied) */
   componentDidMount() {
     let dataSection = d3.select(this.myRef.current);
     const width = 1500,
     height = 1250;
 
-    // Create networkchain container (svg) and give it a zoom functionality
+    /* Create networkchain container (svg) and give it a zoom functionality */
     const svg = dataSection.append("svg")
       .attr("width", "100%")
       .attr("height", "100%")
@@ -241,7 +241,7 @@ class Datasection extends Component {
           .attr("r", 20)
           .attr("fill", nodeColor)
           .attr("clicked", "false")
-          .on("click", click)
+          .on("click", nodeClick)
           .call(drag);
 
         nodeLabel = nodeLabel.data(nodes).enter().append("text")
@@ -272,56 +272,82 @@ class Datasection extends Component {
       }
     }
 
-    function click(d) {
-      if(this.getAttribute("clicked") === "true") {
-        // make popup with details disappear
-        d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
+    function nodeClick(d) {
+      if(this.getAttribute("clicked") === "false") {
+        // make popup appear
+        d3.select(this).attr("clicked", "true");
 
-        // make node smaller
-        d3.select(this).transition()
+        const nodeDetails = detailSection.append("div")
+          .attr("class", "nodedetails")
+          .attr("from_node", "id_" + d.entityId)
+
+        nodeDetails.on("click", showMoreDetails)
+
+        const previewDetails = nodeDetails.append("div");
+        previewDetails.append("span").style("background", nodeColor(d));
+
+        // fill popup with node details (titles, properties)
+        if (d.icovNodeType === "PEOPLE") {
+          previewDetails.append("h3").text(d.label)
+          previewDetails.append("p").text(d.icovNodeSubtype.toLowerCase())
+
+        } else if (d.icovNodeType === "ADDRESS") {
+          previewDetails.append("h3").text(d.streetAddress)
+          previewDetails.append("p").text(d.city)
+
+        } else if (d.icovNodeType === "DEPARTMENT") {
+          previewDetails.append("h3").text(d.departmentName)
+          previewDetails.append("p").text(d.ciy)
+        }
+
+        nodeDetails.append("table")
+        for(var key in d) {
+          if (d[key] !== undefined && d[key] !== "" && key !== "x" && key !== "y" && key !== "vx" && key !== "vy" && key !== "fx" && key !== "fy" ) {
+            let tr = d3.select(`[from_node=${"id_" + d.entityId}]`).select("table").append("tr");
+
+            tr.append("td").text(key + ": ");
+            tr.append("td").text(d[key]);
+          }
+        }
+
+        // make node bigger
+        d3.select(this)
+        .attr("clicked", "true")
+        .transition()
           .duration(300)
-          .attr("r", 20)
-          .attr("clicked", "false")
+          .attr("r", 50)
+          .style("opacity", "1");
 
         d3.selectAll("[clicked=false]").transition()
-          .duration(300)
-          .style("opacity", "1");
+          .duration(30)
+          .style("opacity", ".3");
+
         return
       }
 
-      // make popup with details appear
-      d3.select(this).attr("clicked", "true");
+      // make popup with details disappear
+      d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
 
-      let nodeDetails = detailSection.append("div")
-        .attr("class", "nodedetails")
-        .attr("from_node", "id_" + d.entityId);
-
-        console.log(d)
-      if(d.icovNodeType === "PEOPLE") {
-        nodeDetails
-        .html("<h3>" + d.label + "</h3><p>" + d.icovNodeSubtype.toLowerCase() + "</p>")
-      } else if(d.icovNodeType === "ADDRESS") {
-        nodeDetails
-        .html("<h3>" + d.label + "</h3><h4>" + d.city + ", " + d.country + "</h4><p>" + d.streetAddress + ", " + d.postalCode + "</p>")
-      } else if(d.icovNodeType === "DEPARTMENT") {
-        nodeDetails
-        .html("<h3>" + d.label + "</h3><h4> Department name: " + d.departmentName + "</h4>")
-      } else {
-        nodeDetails
-        .html("")
-      }
-
-      // make node bigger
-      d3.select(this)
-      .attr("clicked", "true")
-      .transition()
+      // make node smaller
+      d3.select(this).transition()
         .duration(300)
-        .attr("r", 50)
-        .style("opacity", "1");
+        .attr("r", 20)
+        .attr("clicked", "false")
 
       d3.selectAll("[clicked=false]").transition()
-        .duration(30)
-        .style("opacity", ".3");
+        .duration(300)
+        .style("opacity", "1");
+    }
+
+    function showMoreDetails() {
+      if (!this.getElementsByTagName("table")[0].classList.contains("open")) {
+        d3.select(this).select("table")
+          .attr("class", "open")
+      } else {
+        d3.select(this).select("table")
+          .attr("class", null);
+      }
+
     }
 
     function ticked() {
@@ -368,8 +394,6 @@ class Datasection extends Component {
         d.fy = null;
       }
     }
-
-
   }
 
   render() {
