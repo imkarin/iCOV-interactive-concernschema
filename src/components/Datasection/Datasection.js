@@ -73,9 +73,8 @@ class Datasection extends Component {
       .attr("class", "nodeLabel")
       .selectAll("text");
 
-    let detailsPopup = dataSection.append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+    let detailSection = dataSection.append("section")
+      .attr("class", "detailsection");
 
     let drag = d3.drag()
       .on("start", dragstarted)
@@ -241,8 +240,6 @@ class Datasection extends Component {
         node = node.data(nodes).enter().append("circle")
           .attr("r", 20)
           .attr("fill", nodeColor)
-          .on("mouseover", showNodeDetails)
-          .on("mouseout", hideNodeDetails)
           .attr("clicked", "false")
           .on("click", click)
           .call(drag);
@@ -255,7 +252,6 @@ class Datasection extends Component {
           .attr("dy", "35px")
           .style("fill", "#000")
           .text((d) => { return d.label })
-          .call(getBB)
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
@@ -276,24 +272,50 @@ class Datasection extends Component {
       }
     }
 
-    function click() {
-      if (this.getAttribute("clicked") === "true") {
-        d3.select(this)
-        .transition()
-          .duration(10)
+    function click(d) {
+      if(this.getAttribute("clicked") === "true") {
+        // make popup with details disappear
+        d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
+
+        // make node smaller
+        d3.select(this).transition()
+          .duration(300)
           .attr("r", 20)
           .attr("clicked", "false")
 
-          d3.selectAll("[clicked=false]").transition()
-          .duration(10)
+        d3.selectAll("[clicked=false]").transition()
+          .duration(300)
           .style("opacity", "1");
-          return
+        return
       }
 
+      // make popup with details appear
+      d3.select(this).attr("clicked", "true");
+
+      let nodeDetails = detailSection.append("div")
+        .attr("class", "nodedetails")
+        .attr("from_node", "id_" + d.entityId);
+
+        console.log(d)
+      if(d.icovNodeType === "PEOPLE") {
+        nodeDetails
+        .html("<h3>" + d.label + "</h3><p>" + d.icovNodeSubtype.toLowerCase() + "</p>")
+      } else if(d.icovNodeType === "ADDRESS") {
+        nodeDetails
+        .html("<h3>" + d.label + "</h3><h4>" + d.city + ", " + d.country + "</h4><p>" + d.streetAddress + ", " + d.postalCode + "</p>")
+      } else if(d.icovNodeType === "DEPARTMENT") {
+        nodeDetails
+        .html("<h3>" + d.label + "</h3><h4> Department name: " + d.departmentName + "</h4>")
+      } else {
+        nodeDetails
+        .html("")
+      }
+
+      // make node bigger
       d3.select(this)
       .attr("clicked", "true")
       .transition()
-        .duration(30)
+        .duration(300)
         .attr("r", 50)
         .style("opacity", "1");
 
@@ -347,39 +369,7 @@ class Datasection extends Component {
       }
     }
 
-    function getBB(selection) {
-      selection.each(function(d){d.bbox = this.getBBox();})
-    }
 
-    function showNodeDetails(d) {
-      detailsPopup
-        .style("left", (d3.event.pageX) + "px")
-        .style("top", (d3.event.pageY - 20) + "px")
-        .transition()
-        .duration(100)
-        .style("opacity", .9);
-
-      // define details in popup
-      if(d.icovNodeType === "PEOPLE") {
-        detailsPopup
-          .html("<h3>" + d.label + "</h3><h4>" + d.sex.toLowerCase() + "</h4><p>" + d.dateOfBirth + "</p>")
-      } else if(d.icovNodeType === "ADDRESS") {
-        detailsPopup
-          .html("<h3>" + d.label + "</h3><h4>" + d.city + ", " + d.country + "</h4><p>" + d.streetAddress + ", " + d.postalCode + "</p>")
-      } else if(d.icovNodeType === "DEPARTMENT") {
-        detailsPopup
-          .html("<h3>" + d.label + "</h3><h4> Department name: " + d.departmentName + "</h4>")
-      } else {
-        detailsPopup
-          .html("")
-      }
-    }
-
-    function hideNodeDetails(d) {
-      detailsPopup.transition()
-          .duration(100)
-          .style("opacity", 0);
-    }
   }
 
   render() {

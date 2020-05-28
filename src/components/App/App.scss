@@ -7,10 +7,20 @@
 
   position: relative;
   text-align: left;
+  color: #445259;
+  font-size: 18px;
+
+  h2 {
+    font-size: 1.67em;
+  }
+
+  h3 {
+    font-size: 1.44em;
+  }
 
   a {
     text-decoration: none;
-    color: rgb(90, 90, 90)
+    color: #445259;
   }
 
   ul, ol {

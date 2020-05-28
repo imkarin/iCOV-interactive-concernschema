@@ -1,16 +1,19 @@
 import React from 'react';
 import './Filtersection.css';
 
+
+
 const Filtersection = (props) => {
   return (
     <div className="Filtersection">
-      <section>
-        <h2>Username</h2>
-        <h3>Afdeling</h3>
-        <h4>Functie</h4>
+
+      <section id="Userbox">
+        <h2>//Username</h2>
+        <h3>//Department</h3>
+        <h4>//Function</h4>
       </section>
 
-      <section>
+      <section id="Filterbox">
         <h2>Filter</h2>
           <table>
             <tbody>
@@ -19,7 +22,7 @@ const Filtersection = (props) => {
                 <td>Personen</td>
                 <td className="switchContainer">
                   <label className="switch">
-                    <input type="checkbox" name="PEOPLE" value="PEOPLE" onChange={ (e) => props.update(e) } />
+                    <input type="checkbox" name="PEOPLE" value="PEOPLE" onChange={ (e) => props.update(e) }/>
                     <span className="slider round"></span>
                   </label>
                 </td>
@@ -53,11 +56,33 @@ const Filtersection = (props) => {
           </table>
       </section>
 
-      <section>
+      <section id="Layoutbox">
         <h2>Weergave</h2>
+
+        <span className="rbnContainer">
+          <input type="radio" id="concernSchema" name="Layoutbox" value="concernSchema" checked="checked"/>
+              <label for="Concernschema">Concernschema</label><br/>
+        </span>
+
+        <span className="rbnContainer">
+          <input type="radio" id="structuurSchema" name="Layoutbox" value="structuurSchema"/>
+              <label for="structuurSchema">Structuurschema</label><br/>
+        </span>
+
+        <span className="rbnContainer">
+          <input type="radio" id="kaartSchema" name="Layoutbox" value="kaartSchema" />
+              <label for="kaartSchema">Kaart</label><br/>
+        </span>
+
+        <span className="rbnContainer">
+          <input type="radio" id="tijdlijnSchema" name="Layoutbox" value="tijdlijnSchema"/>
+              <label for="tijdlijnSchema">Tijdlijn</label>
+        </span>
+
       </section>
     </div>
   );
 }
 
 export default Filtersection;
+
