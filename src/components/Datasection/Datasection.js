@@ -76,6 +76,7 @@ class Datasection extends Component {
       .on("end", dragended);
 
     d3.xml(data).then((document) => {
+      // make JS "Entity" object, to which all XML entities will be converted
       let entities = [];
         class Entity {
           constructor(
@@ -84,6 +85,7 @@ class Datasection extends Component {
             entityId,
             identity,
             labelIsIdentity,
+            cards,
             city,
             country,
             dateOfBirth,
@@ -122,6 +124,7 @@ class Datasection extends Component {
             this.entityId = entityId;
             this.identity = identity;
             this.labelIsIdentity = labelIsIdentity;
+            this.cards = cards;
             this.city = city;
             this.country = country;
             this.dateOfBirth = dateOfBirth;
@@ -159,22 +162,39 @@ class Datasection extends Component {
 
         const groups = ["PEOPLE", "DEPARTMENT", "ADDRESS"];
 
+        // get XML data and convert it to "Entity" objects
         d3.select(document).selectAll("Entity").each(function() {
+          // get the attributes
           const rawAttributes = this.closest("ChartItem").getElementsByTagName("Attribute")
           let attributes = {}
 
           Array.from(rawAttributes).forEach(attr => {
-            const AttributeName = attr.getAttribute("AttributeClassReference")
-            const AttributeValue = attr.getAttribute("Value")
-            attributes[AttributeName] = AttributeValue
+            const attributeName = attr.getAttribute("AttributeClassReference")
+            const attributeValue = attr.getAttribute("Value")
+            attributes[attributeName] = attributeValue
           })
 
+          // get the cards (notes)
+          const rawCards = this.getElementsByTagName("Card")
+          let cards = []
+
+          Array.from(rawCards).forEach(card => {
+            const cardSummary = card.getAttribute("Summary");
+            const cardText = card.getAttribute("Text");
+            cards.push({
+              "summary": cardSummary,
+              "text": cardText
+            })
+          })
+
+          // push this new entity into the "entities" array
           entities.push(new Entity(
             this.closest("ChartItem").getAttribute("Label"),
             this.closest("ChartItem").getAttribute("Description"),
             this.getAttribute("EntityId"),
             this.getAttribute("Identity"),
             this.getAttribute("LabelIsIdentity"),
+            cards,
             attributes._CITY,
             attributes._COUNTRY,
             attributes._DATE_OF_BIRTH,
@@ -210,18 +230,39 @@ class Datasection extends Component {
           ));
         })
 
+        // make JS "Connection" object, to which all XML links will be converted
         let connections = []
         class Connection {
-          constructor(source, target) {
+          constructor(source, target, label, description, cards) {
             this.source = source;
             this.target = target;
+            this.label = label;
+            this.description = description;
+            this.cards = cards;
           }
         }
 
+        // get XML link-data and convert it to "Connection" objects
         d3.select(document).selectAll("Link").each(function() {
+          // get the cards (notes)
+          const rawCards = this.getElementsByTagName("Card")
+          let cards = []
+
+          Array.from(rawCards).forEach(card => {
+            const cardSummary = card.getAttribute("Summary");
+            const cardText = card.getAttribute("Text");
+            cards.push({
+              "summary": cardSummary,
+              "text": cardText
+            })
+          })
+
           connections.push(new Connection(
             this.getAttribute("End1Id"),
-            this.getAttribute("End2Id")
+            this.getAttribute("End2Id"),
+            this.closest("ChartItem").getAttribute("Label"),
+            this.closest("ChartItem").getAttribute("Description"),
+            cards
           ))
         })
 
