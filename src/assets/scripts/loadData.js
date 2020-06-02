@@ -42,9 +42,9 @@ export function loadData(thisComponent) {
   .attr("class", "detailsection");
   
   let drag = d3.drag()
-  .on("start", () => dragstarted)
-  .on("drag", () => dragged)
-  .on("end", () => dragended);
+  .on("start", (d) => dragstarted(d, simulation))
+  .on("drag", (d) => dragged(d))
+  .on("end", (d) => dragended(d, simulation));
     
 
   d3.xml(data).then((document) => {
@@ -176,7 +176,4 @@ export function loadData(thisComponent) {
   .catch((err) => {
     throw err
   })
-
-  // Functions that handle events
-
 }

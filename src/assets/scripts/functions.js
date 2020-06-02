@@ -120,7 +120,7 @@ export function ticked(link, node, nodeLabel) {
 }
 
 
-// Functions for handling drags in the D3 network tree simulation
+// Functions that execute when you drag a node network tree
 export function dragstarted(d, simulation) {
     if (!d3.event.active) simulation.alphaTarget(.2).restart();
     d.fx = d.x;
