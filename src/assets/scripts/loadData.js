@@ -2,48 +2,50 @@ import * as d3 from 'd3';
 import data from '../data/flare.xml';
 import { Entity } from '../../assets/scripts/Entity';
 import { Connection } from '../../assets/scripts/Connection';
+import { nodeColor, nodeClick, ticked, dragstarted, dragged, dragended } from '../../assets/scripts/functions';
 
 export function loadData(thisComponent) {
   const dataSection = d3.select(thisComponent.myRef.current);
   const width = 1500,
   height = 1250;
-
+  
   /* Create networkchain container (svg) and give it a zoom functionality */
   const svg = dataSection.append("svg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .call(d3.zoom().on("zoom", () => svg.attr("transform", d3.event.transform)))
-    .append("g")
+  .attr("width", "100%")
+  .attr("height", "100%")
+  .call(d3.zoom().on("zoom", () => svg.attr("transform", d3.event.transform)))
+  .append("g");
 
   let simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id((d) => { return d.entityId }))
     .force("charge", d3.forceManyBody().strength(-1000))
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .on("tick", ticked)
+    .on("tick", () => ticked(link, node, nodeLabel))
     .stop();
-
-  let link = svg.append("g")
+  
+    let link = svg.append("g")
     .attr("class", "link")
     .attr("stroke", "#999")
     .attr("stroke-width", 2)
     .attr("stroke-opacity", 1)
     .selectAll("line");
-
-  let node = svg.append("g")
+    
+    let node = svg.append("g")
     .attr("class", "node")
     .selectAll("circle");
-
+    
   let nodeLabel = svg.append("g")
-    .attr("class", "nodeLabel")
-    .selectAll("text");
-
+  .attr("class", "nodeLabel")
+  .selectAll("text");
+  
   let detailSection = dataSection.append("section")
-    .attr("class", "detailsection");
-
+  .attr("class", "detailsection");
+  
   let drag = d3.drag()
-    .on("start", dragstarted)
-    .on("drag", dragged)
-    .on("end", dragended);
+  .on("start", () => dragstarted)
+  .on("drag", () => dragged)
+  .on("end", () => dragended);
+    
 
   d3.xml(data).then((document) => {
     // make JS "Entity" object, to which all XML entities will be converted
@@ -176,135 +178,5 @@ export function loadData(thisComponent) {
   })
 
   // Functions that handle events
-  function nodeColor(d) {
-    if (d.group === 1) {
-      return "#365169"
-    } else if (d.group === 2) {
-      return "#4BA9A8"
-    } else if (d.group === 3) {
-      return "#D93E39"
-    }
-  }
 
-  function nodeClick(d) {
-    if(this.getAttribute("clicked") === "false") {
-      // add "bigger" & remove "faded_out" class from clicked node
-      this.setAttribute("clicked", "true");
-      this.classList.add("bigger");
-      this.classList.remove("faded_out");
-
-      // add "faded_out" class to not-clicked nodes
-      document.querySelectorAll("[clicked=false]").forEach(element => {
-        element.classList.add("faded_out");
-      })
-
-      // make popup appear
-      d3.select(this).attr("clicked", "true");
-
-      const nodeDetails = detailSection.append("div")
-        .attr("class", "nodedetails")
-        .attr("from_node", "id_" + d.entityId)
-
-      nodeDetails.on("click", showMoreDetails)
-
-      const previewDetails = nodeDetails.append("div");
-      previewDetails.append("span").style("background", nodeColor(d));
-
-      // fill popup with node details (titles, properties)
-      if (d.icovNodeType === "PEOPLE") {
-        previewDetails.append("h3").text(d.label)
-        previewDetails.append("p").text(d.icovNodeSubtype.toLowerCase())
-
-      } else if (d.icovNodeType === "ADDRESS") {
-        previewDetails.append("h3").text(d.streetAddress)
-        previewDetails.append("p").text(d.city)
-
-      } else if (d.icovNodeType === "DEPARTMENT") {
-        previewDetails.append("h3").text(d.departmentName)
-        previewDetails.append("p").text(d.ciy)
-      }
-
-      nodeDetails.append("table")
-      for(var key in d) {
-        if (d[key] !== undefined && d[key] !== "" && key !== "x" && key !== "y" && key !== "vx" && key !== "vy" && key !== "fx" && key !== "fy" ) {
-          let tr = d3.select(`[from_node=${"id_" + d.entityId}]`).select("table").append("tr");
-
-          tr.append("td").text(key + ": ");
-          tr.append("td").text(d[key]);
-        }
-      }
-
-      return
-    }
-
-    // remove "bigger" class from clicked node
-    this.setAttribute("clicked", "false");
-    this.classList.remove("bigger");
-    this.classList.add("faded_out");
-
-    // remove "faded_out" class from all not-clicked nodes, if there are no clicked nodes anymore
-    document.querySelectorAll("[clicked=false]").forEach(element => {
-      if(document.querySelectorAll("[clicked=true]").length === 0) {
-        element.classList.remove("faded_out");
-      }
-    })
-
-    // make popup with details disappear
-    d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
-  }
-
-  function showMoreDetails() {
-    if (!this.getElementsByTagName("table")[0].classList.contains("open")) {
-      d3.select(this).select("table")
-        .attr("class", "open")
-    } else {
-      d3.select(this).select("table")
-        .attr("class", null);
-    }
-  }
-
-  function ticked() {
-    link
-      .attr("x1", function (d) {
-        return d.source.x;
-      })
-      .attr("y1", function (d) {
-        return d.source.y;
-      })
-      .attr("x2", function (d) {
-        return d.target.x;
-      })
-      .attr("y2", function (d) {
-        return d.target.y;
-      });
-
-    node
-      .attr("transform", function (d) {
-        return "translate(" + d.x + "," + d.y + ")";
-      });
-
-    nodeLabel
-      .attr("transform", function (d) {
-        return "translate(" + d.x + "," + d.y + ")";
-      });
-  }
-
-  function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(.2).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-  }
-
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-
-  function dragended(d) {
-    if (!d3.event.active) {
-      simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
-    }
-  }
 }
