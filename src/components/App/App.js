@@ -3,6 +3,7 @@ import './App.css';
 import Header from '../Header/Header.js';
 import Filtersection from '../Filtersection/Filtersection.js';
 import Datasection from '../Datasection/Datasection.js';
+import Legenda from '../Legenda/Legenda.js';
 
 function App() {
   let [filters, setFilters] = useState(["PEOPLE", "ADDRESS", "DEPARTMENT"]);
@@ -27,6 +28,7 @@ function App() {
       <main>
         <Filtersection update={ updateFilters } />
         <Datasection filters={ filters } />
+        <Legenda />
       </main>
     </div>
   );
