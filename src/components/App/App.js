@@ -5,7 +5,7 @@ import Filtersection from '../Filtersection/Filtersection.js';
 import Datasection from '../Datasection/Datasection.js';
 
 function App() {
-  let [filters, setFilters] = useState([]);
+  let [filters, setFilters] = useState(["PEOPLE", "ADDRESS", "DEPARTMENT"]);
 
   function updateFilters(e) {
     // Update the filters
