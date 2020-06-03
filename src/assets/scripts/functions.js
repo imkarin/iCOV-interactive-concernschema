@@ -15,19 +15,19 @@ export function nodeColor(d) {
 export function nodeIcons(d) {
     //ADDRESS
     if (d.subgroup === 1) {
-        return "http://azamawan.nl/img/nodeIcons/Bedrijf.E.Actief.png"
+        return "https://i.imgur.com/lDY2jKy.png"
     }
     //MANAGER
     else if (d.subgroup === 2) {
-        return ""
+        return "https://i.imgur.com/99i3sOm.png"
     }
     //SEN_FEMALE_EMPLOYEE
     else if (d.subgroup === 3) {
-        return "http://azamawan.nl/img/nodeIcons/Vrouw.Sr.png"
+        return "https://i.imgur.com/6jdLBUN.png"
     }
     //DEPARTMENT
     else if (d.subgroup === 4) {
-        return "http://azamawan.nl/img/nodeIcons/Bedrijf.E.Actief.png"
+        return "https://i.imgur.com/0Auqsmx.png"
     }
     //FLAG
     else if (d.subgroup === 5) {
@@ -35,15 +35,15 @@ export function nodeIcons(d) {
     }
     //YOUNG_MALE_EMPLOYEE
     else if (d.subgroup === 6) {
-        return "http://azamawan.nl/img/nodeIcons/Man.Jr.png"
+        return "https://i.imgur.com/Opi4ps3.png"
     }
     //YOUNG_FEMALE_EMPLOYEE
     else if (d.subgroup === 7) {
-        return "http://azamawan.nl/img/nodeIcons/Vrouw.Jr.png"
+        return "https://i.imgur.com/0oubFlS.png"
     }
     //SEN_MALE_EMPLOYEE
     else if (d.subgroup === 8) {
-        return "http://azamawan.nl/img/nodeIcons/Man.Sr.png"
+        return "https://i.imgur.com/2LaSioX.png"
     }
 }
 
@@ -66,13 +66,12 @@ export function nodeClick(d) {
         d3.select(clickedNode).attr("clicked", "true");
 
         const nodeDetails = d3.select(".detailsection").append("div")
-        .attr("class", "nodedetails")
-        .attr("from_node", "id_" + d.entityId)
-
-        nodeDetails.on("click", showMoreDetails)
+            .attr("class", "nodedetails")
+            .attr("from_node", "id_" + d.entityId)
+            .on("click", showMoreDetails)
 
         const previewDetails = nodeDetails.append("div");
-        previewDetails.append("span").style("background", nodeColor(d));
+        previewDetails.append("img").attr("src", nodeIcons(d));
 
         // fill popup with node details (titles, properties)
         if (d.icovNodeType === "PEOPLE") {
