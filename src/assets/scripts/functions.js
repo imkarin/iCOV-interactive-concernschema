@@ -11,6 +11,42 @@ export function nodeColor(d) {
     }
 }
 
+// Return icons to specific nodes
+export function nodeIcons(d) {
+    //ADDRESS
+    if (d.subgroup === 1) {
+        return "http://azamawan.nl/img/nodeIcons/Bedrijf.E.Actief.png"
+    }
+    //MANAGER
+    else if (d.subgroup === 2) {
+        return ""
+    }
+    //SEN_FEMALE_EMPLOYEE
+    else if (d.subgroup === 3) {
+        return "http://azamawan.nl/img/nodeIcons/Vrouw.Sr.png"
+    }
+    //DEPARTMENT
+    else if (d.subgroup === 4) {
+        return "http://azamawan.nl/img/nodeIcons/Bedrijf.E.Actief.png"
+    }
+    //FLAG
+    else if (d.subgroup === 5) {
+        return ""
+    }
+    //YOUNG_MALE_EMPLOYEE
+    else if (d.subgroup === 6) {
+        return "http://azamawan.nl/img/nodeIcons/Man.Jr.png"
+    }
+    //YOUNG_FEMALE_EMPLOYEE
+    else if (d.subgroup === 7) {
+        return "http://azamawan.nl/img/nodeIcons/Vrouw.Jr.png"
+    }
+    //SEN_MALE_EMPLOYEE
+    else if (d.subgroup === 8) {
+        return "http://azamawan.nl/img/nodeIcons/Man.Sr.png"
+    }
+}
+
 // Make pop-up with details appear on node click
 export function nodeClick(d) {
     const clickedNode = d3.event.target;
@@ -23,7 +59,7 @@ export function nodeClick(d) {
 
         // add "faded_out" class to not-clicked nodes
         document.querySelectorAll("[clicked=false]").forEach(element => {
-        element.classList.add("faded_out");
+            element.classList.add("faded_out");
         })
 
         // make popup appear
@@ -52,8 +88,8 @@ export function nodeClick(d) {
             previewDetails.append("p").text(d.ciy)
         }
 
-            nodeDetails.append("table")
-            for(var key in d) {
+        nodeDetails.append("table")
+        for(var key in d) {
             if (d[key] !== undefined && d[key] !== "" && key !== "x" && key !== "y" && key !== "vx" && key !== "vy" && key !== "fx" && key !== "fy" ) {
                 let tr = d3.select(`[from_node=${"id_" + d.entityId}]`).select("table").append("tr");
 
@@ -73,7 +109,7 @@ export function nodeClick(d) {
     // remove "faded_out" class from all not-clicked nodes, if there are no clicked nodes anymore
     document.querySelectorAll("[clicked=false]").forEach(element => {
         if(document.querySelectorAll("[clicked=true]").length === 0) {
-        element.classList.remove("faded_out");
+            element.classList.remove("faded_out");
         }
     })
 
@@ -84,7 +120,7 @@ export function nodeClick(d) {
 // Show more details when you click on the detail popup
 function showMoreDetails() {
     if (!this.getElementsByTagName("table")[0].classList.contains("open")) {
-      d3.select(this).select("table")
+        d3.select(this).select("table")
         .attr("class", "open")
     } else {
       d3.select(this).select("table")
@@ -95,28 +131,16 @@ function showMoreDetails() {
 // Functions for the D3 network tree simulation
 export function ticked(link, node, nodeLabel) {
     link
-        .attr("x1", function (d) {
-        return d.source.x;
-        })
-        .attr("y1", function (d) {
-        return d.source.y;
-        })
-        .attr("x2", function (d) {
-        return d.target.x;
-        })
-        .attr("y2", function (d) {
-        return d.target.y;
-        });
+        .attr("x1", (d) => { return d.source.x + 20 })
+        .attr("y1", (d) => { return d.source.y + 20 })
+        .attr("x2", (d) => { return d.target.x + 20 })
+        .attr("y2", (d) => { return d.target.y + 20 });
 
     node
-        .attr("transform", function (d) {
-        return "translate(" + d.x + "," + d.y + ")";
-        });
+        .attr("transform", (d) => { return "translate(" + d.x + "," + d.y + ")" });
 
     nodeLabel
-        .attr("transform", function (d) {
-        return "translate(" + d.x + "," + d.y + ")";
-        });
+        .attr("transform", (d) => { return "translate(" + (d.x + 20)+ "," + (d.y + 25) + ")" });
 }
 
 

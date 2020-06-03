@@ -11,11 +11,21 @@
 		opacity: .9;
 	}
 
-	circle {
-		transition: r .3s, opacity .3s;
+	image {
+		width: 50px;
+		transition: opacity .3s, width .3s;
+
+		&:hover {
+			width: 60px;
+			cursor: pointer;
+		}
 
 		&.bigger {
-			r: 50;
+			width: 100px;
+
+			&:hover {
+				width: 100px;
+			}
 		}
 
 		&.faded_out {
@@ -24,11 +34,6 @@
 
 		&.filtered_out {
 			opacity: .3;
-		}
-	}
-	.node {
-		&:hover {
-			cursor: pointer;
 		}
 	}
 
