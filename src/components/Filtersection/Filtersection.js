@@ -1,8 +1,6 @@
 import React from 'react';
 import './Filtersection.css';
 
-
-
 const Filtersection = (props) => {
   return (
     <div className="Filtersection">
@@ -22,7 +20,7 @@ const Filtersection = (props) => {
                 <td>Personen</td>
                 <td className="switchContainer">
                   <label className="switch">
-                    <input type="checkbox" name="PEOPLE" value="PEOPLE" onChange={ (e) => props.update(e) }/>
+                    <input type="checkbox" name="PEOPLE" value="PEOPLE" defaultChecked onChange={ (e) => props.update(e) }/>
                     <span className="slider round"></span>
                   </label>
                 </td>
@@ -34,7 +32,7 @@ const Filtersection = (props) => {
                 <td>Vastgoed</td>
                 <td className="switchContainer">
                     <label className="switch">
-                        <input type="checkbox" name="ADDRESS" value="ADDRESS" onChange={ (e) => props.update(e) } />
+                        <input type="checkbox" name="ADDRESS" value="ADDRESS" defaultChecked onChange={ (e) => props.update(e) } />
                         <span className="slider round"></span>
                     </label>
                 </td>
@@ -46,7 +44,7 @@ const Filtersection = (props) => {
                 <td>Department</td>
                 <td className="switchContainer">
                   <label className="switch">
-                      <input type="checkbox" name="DEPARTMENT" value="DEPARTMENT" onChange={ (e) => props.update(e) } />
+                      <input type="checkbox" name="DEPARTMENT" value="DEPARTMENT" defaultChecked onChange={ (e) => props.update(e) } />
                       <span className="slider round"></span>
                   </label>
                 </td>
