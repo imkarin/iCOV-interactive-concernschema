@@ -60,23 +60,31 @@ const Filtersection = (props) => {
         <h2>Weergave</h2>
 
         <span className="rbnContainer">
-          <input type="radio" id="concernSchema" name="Layoutbox" value="concernSchema" checked="checked"/>
-              <label for="Concernschema">Concernschema</label><br/>
+          <label>
+            <input type="radio" id="concernSchema" name="Layoutbox" value="concernSchema" defaultChecked />
+            Concernschema
+          </label>
         </span>
 
         <span className="rbnContainer">
-          <input type="radio" id="structuurSchema" name="Layoutbox" value="structuurSchema"/>
-              <label for="structuurSchema">Structuurschema</label><br/>
+          <label>
+            <input type="radio" id="structuurSchema" name="Layoutbox" value="structuurSchema"/>
+            Structuurschema
+          </label>
         </span>
 
         <span className="rbnContainer">
-          <input type="radio" id="kaartSchema" name="Layoutbox" value="kaartSchema" />
-              <label for="kaartSchema">Kaart</label><br/>
+          <label>
+            <input type="radio" id="kaartSchema" name="Layoutbox" value="kaartSchema" />
+            Kaart
+          </label>
         </span>
 
         <span className="rbnContainer">
-          <input type="radio" id="tijdlijnSchema" name="Layoutbox" value="tijdlijnSchema"/>
-              <label for="tijdlijnSchema">Tijdlijn</label>
+          <label>
+            <input type="radio" id="tijdlijnSchema" name="Layoutbox" value="tijdlijnSchema"/>
+            Tijdlijn
+          </label>
         </span>
 
       </section>
