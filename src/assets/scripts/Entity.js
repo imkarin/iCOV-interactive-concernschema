@@ -37,7 +37,8 @@ export class Entity {
     icovNodeOrFlag,
     icovNodeKey,
     icovAditumQuery,
-    group
+    group,
+    subgroup
   ) {
     this.label = label;
     this.description = description;
@@ -77,5 +78,6 @@ export class Entity {
     this.icovNodeKey = icovNodeKey;
     this.icovAditumQuery = icovAditumQuery;
     this.group = group;
+    this.subgroup = subgroup;
   }
 }
