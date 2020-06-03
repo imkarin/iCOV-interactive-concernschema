@@ -7,8 +7,8 @@ function openLegenda() {
 }
 
   return (
-    <section className="Legenda">
-      <div className="label" onClick={ openLegenda }>
+    <section className="Legenda" onClick={ openLegenda }>
+      <div className="label">
         <p>Legenda</p>
       </div>
       <div className="items">
