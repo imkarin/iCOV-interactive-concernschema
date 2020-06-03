@@ -6,9 +6,11 @@ const Filtersection = (props) => {
     <div className="Filtersection">
 
       <section id="Userbox">
-        <h2>Username</h2>
-        <h3>Department</h3>
-        <h4>Function</h4>
+
+        <h3>Welkom, </h3>
+        <h3>Deborah Felix</h3>
+        <h4>Ondermijning</h4>
+        <h5>Accountmanager</h5>
       </section>
 
       <section id="Filterbox">

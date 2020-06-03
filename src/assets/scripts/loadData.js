@@ -163,12 +163,15 @@ export function loadData(thisComponent) {
 
     nodeLabel = nodeLabel.data(nodes).enter().append("text")
       .attr("class", "text")
-      .attr("clicked", "false")
       .attr("text-anchor", "middle")
       .attr("dx", 0)
       .attr("dy", "35px")
+
       .style("fill", "#000")
+      .style('background-color','red')
       .text((d) => { return d.label })
+
+
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
