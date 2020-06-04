@@ -6,13 +6,24 @@
   z-index: 1;
   margin-top: 70px;
   min-width: 325px;
-  background-color: #fafafa;
+  background-color: #ffffff;
   min-height: 100vh;
-  border-left: solid 30px;
-  border-image: linear-gradient(to top, #175183, #52AAD8, #F9FAFC) 1 100%;
+  color: #000;
+  box-shadow: 3px 0 5px -2px #888;
+
+  h1{
+    font-size: 1.8em;
+    padding-bottom: 15px;
+  }
+
 
   h2 {
-    font-weight: 900;
+    font-weight: 600;
+    font-size: 1.4em;
+
+    border-bottom: solid 2px #000;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
   }
 
   h3 {
@@ -84,21 +95,27 @@
   }
 
   .switchContainer {
-    padding: 5px 0px 5px 75px;
+    padding: 10px 0px 10px 50px;
+ 
   }
 
   #Userbox{
-    padding-bottom: 50px;
+    padding: 30px 0px 30px 0px;
 }
 
-#Userbox h2{
-    font-weight: 600;
-    font-size: 1.8em;
-    padding-bottom: 15px;
-}
+
 
 #Userbox h3, h4{
 font-weight: normal;
+}
+
+.Rijksoverheid{
+  width: 125px;
+  position:fixed;
+  bottom:0px;
+  margin-bottom: 30px;
+
+
 }
 
 #Filterbox{
@@ -110,11 +127,7 @@ font-weight: normal;
 }
 
 
-#Filterbox h2{
-    border-bottom: solid 2px #000;
-    padding-bottom: 15px;
-    margin-bottom: 30px;
-}
+
 
 #Layoutbox h2{
     border-bottom: solid 2px #000;
@@ -123,11 +136,13 @@ font-weight: normal;
 }
 
 
-#Layoutbox .rbnContainer{display: block; padding: 10px 0px 10px 0px; font-size: 1.2em; }
+#Layoutbox .rbnContainer{display: block; padding: 0px 0px 10px 0px; font-size: 1.2em; }
 
 #Layoutbox .rbnContainer input{margin-right: 30px; }
 
 }
+
+
 
 
 
