@@ -1,16 +1,18 @@
 import React from 'react';
 import './Filtersection.css';
 
+import Rijksoverheid from '../../assets/images/Rijksoverheid.png';
+
 const Filtersection = (props) => {
   return (
     <div className="Filtersection">
 
       <section id="Userbox">
 
-        <h3>Welkom, </h3>
-        <h3>Deborah Felix</h3>
+      <h3>Welkom,</h3>
+        <h1>D. Felix</h1>
         <h4>Ondermijning</h4>
-        <h5>Accountmanager</h5>
+        <h4>Accountmanager</h4>
       </section>
 
       <section id="Filterbox">
@@ -86,6 +88,8 @@ const Filtersection = (props) => {
             Tijdlijn
           </label>
         </span>
+
+        <img src={Rijksoverheid} alt="Rijksoverheid Logo" className="Rijksoverheid"></img>
 
       </section>
     </div>
