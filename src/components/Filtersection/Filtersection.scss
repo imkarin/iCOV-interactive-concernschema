@@ -2,24 +2,23 @@
   position: fixed;
   padding: 20px 0px 20px 30px;
   height: 100%;
-  width: 200px;
   z-index: 1;
   margin-top: 70px;
-  min-width: 325px;
+  min-width: 275px;
   background-color: #ffffff;
   min-height: 100vh;
   color: #000;
   box-shadow: 3px 0 5px -2px #888;
 
-  h1{
-    font-size: 1.8em;
+  h1 {
+    font-size: 1.5em;
     padding-bottom: 15px;
   }
 
 
   h2 {
     font-weight: 600;
-    font-size: 1.4em;
+    font-size: 1.2em;
 
     border-bottom: solid 2px #000;
     padding-bottom: 10px;
@@ -30,6 +29,20 @@
     font-weight: bold;
   }
 
+  h4 {
+    font-size: 1em;
+  }
+
+
+
+
+  .switchContainer {
+    padding: 5px 0px 5px 50px
+  }
+
+  .switchContainer {
+    padding: 5px 0px 5px 50px
+  }
 
 
   .switch {
@@ -70,15 +83,15 @@
   }
 
   input {
-    &:checked + .slider {
+    &:checked+.slider {
       background-color: #BEDFF2;
     }
 
-    &:focus + .slider {
+    &:focus+.slider {
       box-shadow: 0 0 1px #2196F3;
     }
 
-    &:checked + .slider:before {
+    &:checked+.slider:before {
       -webkit-transform: translateX(26px);
       -ms-transform: translateX(26px);
       transform: translateX(26px);
@@ -95,50 +108,55 @@
   }
 
   .switchContainer {
-    padding: 10px 0px 10px 50px;
- 
+    padding: 5px 0px 5px 50px;
+
   }
 
-  #Userbox{
+  #Userbox {
     padding: 30px 0px 30px 0px;
-}
+  }
 
 
 
-#Userbox h3, h4{
-font-weight: normal;
-}
+  #Userbox h3,
+  h4 {
+    font-weight: normal;
+  }
 
-.Rijksoverheid{
-  width: 125px;
-  position:fixed;
-  bottom:0px;
-  margin-bottom: 30px;
+  .Rijksoverheid {
+    width: 125px;
+    position: fixed;
+    bottom: 0px;
+    margin-bottom: 30px;
 
 
-}
+  }
+  
 
-#Filterbox{
+  #Filterbox {
     padding: 30px 0px 50px 0px;
-}
+  }
 
-#Filterbox td{
-    font-size: 1.2em;
-}
+  #Filterbox td {
+    font-size: 1em;
+  }
 
-
-
-
-#Layoutbox h2{
+  #Layoutbox h2 {
     border-bottom: solid 2px #000;
     padding-bottom: 15px;
     margin-bottom: 30px;
-}
+  }
 
 
-#Layoutbox .rbnContainer{display: block; padding: 0px 0px 10px 0px; font-size: 1.2em; }
+  #Layoutbox .rbnContainer {
+    display: block;
+    padding: 0px 0px 10px 0px;
+    font-size: 1em;
+  }
 
-#Layoutbox .rbnContainer input{margin-right: 30px; }
+  #Layoutbox .rbnContainer input {
+    margin-right: 30px;
+  }
 
 }
 
