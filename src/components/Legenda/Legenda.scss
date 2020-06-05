@@ -1,6 +1,6 @@
 .Legenda {
-	position: fixed;
-	right: 0;
+	position: absolute;
+	right: -15px;
 	top: 65px; // Header height
 	width: 350px;
 	//height: 100vh;
@@ -117,7 +117,6 @@
 
 	&.open {
 		transform: translateX(0);
-		position: absolute;
 
 		.label {
 			opacity: 0;
