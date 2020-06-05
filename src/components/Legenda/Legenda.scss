@@ -1,16 +1,14 @@
 .Legenda {
 	position: fixed;
-
-
 	right: 0;
-	top: 70px; // Header height
+	top: 65px; // Header height
 	width: 350px;
 	//height: 100vh;
 	transform: translateX(350px);
 	box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, .3);
 	transition: .5s;
 
-	
+
 
 	table tbody tr td h2:nth-of-type(1){
 		float: left;
@@ -23,15 +21,15 @@
 
 	.label {
 		position: fixed;
-	
+
 		right: 375px;
-		bottom: 100px;
+		bottom: 90px;
 		width: 150px;
 		padding: 12px 40px;
 		background-color: #574AB3;
 		color: #ffffff;
 		text-align: center;
-	
+
 		border-radius: 0px 10px 0px 10px;
 		box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, .3);
 		transition: .5s;
@@ -41,7 +39,7 @@
 
 	.iconLabel{font-weight: bold;}
 
-	
+
 
 
 
@@ -51,7 +49,7 @@
 		background: #ffffff;
 
 	tbody tr{display: block; padding: 5px 0px 5px 0px}
-	
+
 	tbody img{
 		width: 35px;
 		margin: 0px 25px 0px 0px;
@@ -63,13 +61,13 @@
 
 	tbody
 
-		
+
 
 		h2{
 
 			font-weight: 400;
 			font-size: 1.5em;
-	
+
 		}
 
 		h3{
@@ -80,7 +78,7 @@
 			margin: 15px -30px 0px -30px;
 			padding: 5px 0px 5px 15px;
 			font-weight: normal;
-			
+
 		}
 
 		h4 {
@@ -88,8 +86,8 @@
 			color: #000;
 			margin: 0px -30px 0px 0px;
 			font-weight: 500;
-		
-		 
+
+
 			border-bottom: solid 2px #000;
 			padding-bottom: 5px;
 			margin-bottom: 30px;
