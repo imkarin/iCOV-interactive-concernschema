@@ -11,8 +11,9 @@ function App() {
       <div className="App">
       <Header />
         <Switch>
-          <Route path="/" exact component={ Concernschema } />
-          <Route path="/login" exact component={ Loginpage } />
+          <Route path="/" exact component={ Loginpage } />
+          <Route path="/login" component={ Loginpage } />
+          <Route path="/concernschema" component={ Concernschema } />
         </Switch>
       </div>
     </Router>
