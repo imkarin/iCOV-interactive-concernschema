@@ -12,6 +12,7 @@ function App() {
       <Header />
         <Switch>
           <Route path="/" exact component={ Loginpage } />
+          <Route path="/iCOV-interactive-concernschema" component={ Loginpage } />
           <Route path="/login" component={ Loginpage } />
           <Route path="/concernschema" component={ Concernschema } />
         </Switch>

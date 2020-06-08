@@ -38,6 +38,8 @@
       input {
         padding: 15px 40px;
         border-radius: 10px;
+        font-size: 1em;
+        max-height: 50px;
       
         &:focus {
           outline: none;
@@ -46,18 +48,19 @@
       }
       
       input[type=password] {
-        padding: 15px;
+        padding: 15px 25px;
         min-width: 300px;
-        border: 1.5px solid #445259;
         margin-right: 20px;
+        font-size: 1.05em;
+        letter-spacing: .1em;
+        color: #9aa5ad;
+        border: 1.5px solid #445259;
       }
 
       input[type=submit] {
         border: none;
         background-color: #1B7DFE;
         color: #ffffff;
-        font-size: .95em;
-        letter-spacing: .5px;
 
         &:focus {
           background-color: rgb(16, 106, 223);
