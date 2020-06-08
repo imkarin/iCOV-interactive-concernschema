@@ -1,36 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import Header from '../Header/Header.js';
-import Filtersection from '../Filtersection/Filtersection.js';
-import Datasection from '../Datasection/Datasection.js';
-import Legenda from '../Legenda/Legenda.js';
+import Header from '../Header/Header';
+import Concernschema from '../Concernschema/Concernschema';
+import Loginpage from '../Loginpage/Loginpage';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
-  let [filters, setFilters] = useState(["PEOPLE", "ADDRESS", "DEPARTMENT"]);
-
-  function updateFilters(e) {
-    // Update the filters
-    const newFilters = [...filters]
-
-    if(e.target.checked === true) {
-      newFilters.push(e.target.name)
-      setFilters(newFilters);
-    } else if (e.target.checked === false) {
-      const itemIndex = newFilters.indexOf(e.target.name)
-      newFilters.splice(itemIndex, 1)
-      setFilters(newFilters)
-    }
-  }
-
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <Header />
-      <main>
-        <Filtersection update={ updateFilters } />
-        <Datasection filters={ filters } />
-        <Legenda />
-      </main>
-    </div>
+        <Switch>
+          <Route path="/" exact component={ Loginpage } />
+          <Route path="/login" component={ Loginpage } />
+          <Route path="/concernschema" component={ Concernschema } />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
