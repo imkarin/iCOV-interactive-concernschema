@@ -51,8 +51,6 @@
 		
 		}
 	
-	
-	
 		h1{ font-size: 1.8em; margin-bottom: 0px; margin-top: 10px;}
 		h2{ font-size: 1.3em; font-weight: normal;}
 
@@ -120,6 +118,15 @@
 			box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, .3);
 			transition: .5s;
 			overflow: hidden;
+			
+  			.btnClosePopup {
+				position: absolute;
+				right: 30px;
+				font-size: 1.7em;
+				line-height: 1.5em;
+				cursor: pointer;
+				z-index: 9999999;
+			}
 
 			div:first-of-type {
 				width: 100%;
@@ -146,8 +153,6 @@
 					padding-left: 30px;
 				}
 			}
-
-		
 
 			table {
 				width: 100%;
