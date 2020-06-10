@@ -19,12 +19,6 @@ export function loadData(thisComponent) {
 
 
 */
-
-
-
-
-
-
   /* Create networkchain container (svg) and give it a zoom functionality */
   const svg = dataSection.append("svg")
   .attr("width", "100%")
