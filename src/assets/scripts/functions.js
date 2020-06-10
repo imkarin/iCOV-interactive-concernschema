@@ -1,4 +1,6 @@
 import * as d3 from 'd3';
+import { FaTimes } from "react-icons/fa";
+import { render } from '@testing-library/react';
 
 // Determine color of node by its group
 export function nodeColor(d) {
@@ -70,8 +72,25 @@ export function nodeClick(d) {
             .attr("from_node", "id_" + d.entityId)
             .on("click", showMoreDetails)
 
+
+
+
+        nodeDetails.append("span")
+        .attr("class", "btnCloseNode")
+        .text("x")
+    
+     
+        
+      
+        
+        
+   
+        
+        
+
         const previewDetails = nodeDetails.append("div");
         previewDetails.append("img").attr("src", nodeIcons(d));
+        
 
         // fill popup with node details (titles, properties)
         if (d.icovNodeType === "PEOPLE") {
@@ -86,6 +105,8 @@ export function nodeClick(d) {
             previewDetails.append("h3").text(d.departmentName)
             previewDetails.append("p").text(d.ciy)
         }
+
+        
 
         nodeDetails.append("table")
         for(var key in d) {

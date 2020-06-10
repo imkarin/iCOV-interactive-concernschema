@@ -26,6 +26,7 @@ function App() {
     <div className="App">
       <Header />
       <main>
+        
         <Filtersection update={ updateFilters } />
         <Datasection filters={ filters } />
         <Legenda />

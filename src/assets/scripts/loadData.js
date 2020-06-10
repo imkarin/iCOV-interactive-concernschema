@@ -3,11 +3,27 @@ import data from '../data/flare.xml';
 import { Entity } from '../../assets/scripts/Entity';
 import { Connection } from '../../assets/scripts/Connection';
 import { nodeIcons, nodeClick, ticked, dragstarted, dragged, dragended } from '../../assets/scripts/functions';
+import Datasection from '../../components/Datasection/Datasection';
 
 export function loadData(thisComponent) {
   const dataSection = d3.select(thisComponent.myRef.current);
+
   const width = 1500,
   height = 1250;
+
+  /*const userDataview = dataSection.append("div")
+  .attr("class", "userDataview")
+  .text("Concernschema")
+  .append("h1", "Concernschema")
+
+
+
+*/
+
+
+
+
+
 
   /* Create networkchain container (svg) and give it a zoom functionality */
   const svg = dataSection.append("svg")

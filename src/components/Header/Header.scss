@@ -7,8 +7,8 @@
 	background-color: #1B7DFE;
 
 	nav {
-		margin-left: calc(100% - 540px);
-		width: 500px;
+		margin-left: calc(100% - 700px);
+		width: 700px;
 		display: flex;
 		justify-content: space-between;
 		img {
@@ -19,5 +19,38 @@
 	}
 	a {
 		color: #fff;
+		font-size: 1em;
+		vertical-align: sub;
+		padding: 0px 30px 0px 30px;
+		
 	}
+
+	.icons{
+		font-size: 2em;
+		vertical-align: middle;
+		padding: 0px 10px 0px 0px;
+		
+	}
+
+	.toggleNavigation{
+
+		font-size: 2em;
+		color: #fff;
+		vertical-align: middle;
+	}
+
+	
+
 }
+
+.Header:active{
+
+	margin-top: -100px;
+	-webkit-transition:all 0.5s ease;
+
+  -moz-transition:all 0.5s ease;
+
+  transition:all 0.5s ease;
+
+}
+

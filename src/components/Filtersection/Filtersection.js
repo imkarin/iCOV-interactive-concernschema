@@ -92,7 +92,13 @@ const Filtersection = (props) => {
         <img src={Rijksoverheid} alt="Rijksoverheid Logo" className="Rijksoverheid"></img>
 
       </section>
+
     </div>
+
+
+
+    
+
   );
 }
 
