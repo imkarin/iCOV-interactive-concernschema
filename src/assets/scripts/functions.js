@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 // Determine color of node by its group
 export function nodeColor(d) {
@@ -10,6 +10,7 @@ export function nodeColor(d) {
         return "#D93E39"
     }
 }
+
 
 // Return icons to specific nodes
 export function nodeIcons(d) {
@@ -47,71 +48,89 @@ export function nodeIcons(d) {
     }
 }
 
-// Make pop-up with details appear on node click
+
+// Function that runs when you click a node
 export function nodeClick(d) {
     const clickedNode = d3.event.target;
 
     if(clickedNode.getAttribute("clicked") === "false") {
-        // add "bigger" & remove "faded_out" class from clicked node
-        clickedNode.setAttribute("clicked", "true");
-        clickedNode.classList.add("bigger");
-        clickedNode.classList.remove("faded_out");
-
-        // add "faded_out" class to not-clicked nodes
-        document.querySelectorAll("[clicked=false]").forEach(element => {
-            element.classList.add("faded_out");
-        })
-
-        // make popup appear
-        d3.select(clickedNode).attr("clicked", "true");
-
-        const nodeDetails = d3.select(".detailsection").append("div")
-            .attr("class", "nodedetails")
-            .attr("from_node", "id_" + d.entityId)
-            .on("click", showMoreDetails)
-
-        const previewDetails = nodeDetails.append("div");
-        previewDetails.append("img").attr("src", nodeIcons(d));
-
-        // fill popup with node details (titles, properties)
-        if (d.icovNodeType === "PEOPLE") {
-            previewDetails.append("h3").text(d.label)
-            previewDetails.append("p").text(d.icovNodeSubtype.toLowerCase())
-
-        } else if (d.icovNodeType === "ADDRESS") {
-            previewDetails.append("h3").text(d.streetAddress)
-            previewDetails.append("p").text(d.city)
-
-        } else if (d.icovNodeType === "DEPARTMENT") {
-            previewDetails.append("h3").text(d.departmentName)
-            previewDetails.append("p").text(d.ciy)
-        }
-
-        nodeDetails.append("table")
-        for(var key in d) {
-            if (d[key] !== undefined && d[key] !== "" && key !== "x" && key !== "y" && key !== "vx" && key !== "vy" && key !== "fx" && key !== "fy" ) {
-                let tr = d3.select(`[from_node=${"id_" + d.entityId}]`).select("table").append("tr");
-
-                tr.append("td").text(key + ": ");
-                tr.append("td").text(d[key]);
-            }
-        }
-
+        openPopup(clickedNode, d);
         return
     }
 
+    closePopup(clickedNode, d);
+}
+
+
+// Function that shows detail pop-up
+function openPopup(clickedNode, d){
+    // add "bigger" & remove "faded_out" class from clicked node
+    clickedNode.setAttribute("clicked", "true");
+    clickedNode.classList.add("bigger");
+    clickedNode.classList.remove("faded_out");
+
+    // add "faded_out" class to not-clicked nodes
+    document.querySelectorAll("[clicked=false]").forEach(element => {
+        element.classList.add("faded_out");
+    })
+
+    // make popup appear
+    d3.select(clickedNode).attr("clicked", "true");
+
+    const nodeDetails = d3.select(".detailsection").append("div")
+        .attr("class", "nodedetails")
+        .attr("from_node", "id_" + d.entityId)
+        .on("click", showMoreDetails)
+
+    nodeDetails.append("span")
+    .attr("class", "btnClosePopup")
+    .text("x")
+    .on("click", () => { closePopup(clickedNode, d) })
+
+    const previewDetails = nodeDetails.append("div");
+    previewDetails.append("img").attr("src", nodeIcons(d));
+
+    // fill popup with node details (titles, properties)
+    if (d.icovNodeType === "PEOPLE") {
+        previewDetails.append("h3").text(d.label)
+        previewDetails.append("p").text(d.icovNodeSubtype.toLowerCase())
+
+    } else if (d.icovNodeType === "ADDRESS") {
+        previewDetails.append("h3").text(d.streetAddress)
+        previewDetails.append("p").text(d.city)
+
+    } else if (d.icovNodeType === "DEPARTMENT") {
+        previewDetails.append("h3").text(d.departmentName)
+        previewDetails.append("p").text(d.ciy)
+    }
+
+    // add table with data to the popup
+    nodeDetails.append("table")
+    for(var key in d) {
+        if (d[key] !== undefined && d[key] !== "" && key !== "x" && key !== "y" && key !== "vx" && key !== "vy" && key !== "fx" && key !== "fy" ) {
+            let tr = d3.select(`[from_node=${"id_" + d.entityId}]`).select("table").append("tr");
+
+            tr.append("td").text(key + ": ");
+            tr.append("td").text(d[key]);
+        }
+    }
+}
+
+
+// Function that runs when you want to close a detail pop-up
+function closePopup(clickedNode, d){
     // remove "bigger" class from clicked node
     clickedNode.setAttribute("clicked", "false");
     clickedNode.classList.remove("bigger");
     clickedNode.classList.add("faded_out");
-
+    
     // remove "faded_out" class from all not-clicked nodes, if there are no clicked nodes anymore
     document.querySelectorAll("[clicked=false]").forEach(element => {
         if(document.querySelectorAll("[clicked=true]").length === 0) {
             element.classList.remove("faded_out");
         }
     })
-
+    
     // make popup with details disappear
     d3.select(`[from_node=${"id_" + d.entityId}]`).remove();
 }
@@ -126,6 +145,7 @@ function showMoreDetails() {
         .attr("class", null);
     }
 }
+
 
 // Functions for the D3 network tree simulation
 export function ticked(link, node, nodeLabel) {
