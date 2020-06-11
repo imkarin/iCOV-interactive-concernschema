@@ -3,6 +3,7 @@ import './App.css';
 import Header from '../Header/Header';
 import Concernschema from '../Concernschema/Concernschema';
 import Loginpage from '../Loginpage/Loginpage';
+import Userportal from '../Userportal/Userportal';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" exact component={ Loginpage } />
           <Route path="/iCOV-interactive-concernschema" component={ Loginpage } />
           <Route path="/login" component={ Loginpage } />
+          <Route path="/userportal" component={ Userportal } />
           <Route path="/concernschema" component={ Concernschema } />
         </Switch>
       </div>
