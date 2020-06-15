@@ -1,6 +1,8 @@
 import React from 'react';
 import './Legenda.css';
 
+import { FaTimes } from "react-icons/fa";
+
 import seniorMedewerkerMan from '../../assets/images/icons/Man.Sr.png';
 import juniorMedewerkerMan from '../../assets/images/icons/Man.Jr.png';
 
@@ -39,17 +41,17 @@ const Legenda = () => {
 						<tr>
 							<td>
 								<h2>Legenda</h2>
-
-				
 							
-							</td>
-					
+							</td>					
 						</tr>
 					</tbody>
 				</table>
 
 
 				<h3>Iconen</h3>
+
+
+				<section className="Icons">
 
 				<h4>Personen</h4>
 
@@ -113,6 +115,8 @@ const Legenda = () => {
 
 					</tbody>
 				</table>
+
+				</section>
 
 			</div>
 		</section>
