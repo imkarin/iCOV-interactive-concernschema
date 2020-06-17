@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.96e1a8f0.chunk.css",
-    "main.js": "/static/js/main.67cfb6a7.chunk.js",
-    "main.js.map": "/static/js/main.67cfb6a7.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.1d8e34b6.js",
-    "runtime-main.js.map": "/static/js/runtime-main.1d8e34b6.js.map",
-    "static/js/2.2c7d6145.chunk.js": "/static/js/2.2c7d6145.chunk.js",
-    "static/js/2.2c7d6145.chunk.js.map": "/static/js/2.2c7d6145.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.5aebad51a545183acfa37004d67875e2.js": "/precache-manifest.5aebad51a545183acfa37004d67875e2.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.96e1a8f0.chunk.css.map": "/static/css/main.96e1a8f0.chunk.css.map",
-    "static/js/2.2c7d6145.chunk.js.LICENSE.txt": "/static/js/2.2c7d6145.chunk.js.LICENSE.txt",
-    "static/media/Logo.png": "/static/media/Logo.fc8c0254.png",
-    "static/media/Man.NW.png": "/static/media/Man.NW.ef72bc6f.png",
-    "static/media/Rijksoverheid.png": "/static/media/Rijksoverheid.2a7eb589.png",
-    "static/media/Vrouw.NW.png": "/static/media/Vrouw.NW.80957e64.png",
-    "static/media/flare.xml": "/static/media/flare.305374a3.xml",
-    "static/media/nodePreview.png": "/static/media/nodePreview.ab338921.png",
-    "static/media/profielfoto.png": "/static/media/profielfoto.2b4a9754.png"
+    "main.css": "/iCOV-interactive-concernschema/static/css/main.96e1a8f0.chunk.css",
+    "main.js": "/iCOV-interactive-concernschema/static/js/main.9e0b4fad.chunk.js",
+    "main.js.map": "/iCOV-interactive-concernschema/static/js/main.9e0b4fad.chunk.js.map",
+    "runtime-main.js": "/iCOV-interactive-concernschema/static/js/runtime-main.447d6411.js",
+    "runtime-main.js.map": "/iCOV-interactive-concernschema/static/js/runtime-main.447d6411.js.map",
+    "static/js/2.2c7d6145.chunk.js": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js",
+    "static/js/2.2c7d6145.chunk.js.map": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js.map",
+    "index.html": "/iCOV-interactive-concernschema/index.html",
+    "precache-manifest.c935b2ea539c713d91d39710aff18329.js": "/iCOV-interactive-concernschema/precache-manifest.c935b2ea539c713d91d39710aff18329.js",
+    "service-worker.js": "/iCOV-interactive-concernschema/service-worker.js",
+    "static/css/main.96e1a8f0.chunk.css.map": "/iCOV-interactive-concernschema/static/css/main.96e1a8f0.chunk.css.map",
+    "static/js/2.2c7d6145.chunk.js.LICENSE.txt": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js.LICENSE.txt",
+    "static/media/Logo.png": "/iCOV-interactive-concernschema/static/media/Logo.fc8c0254.png",
+    "static/media/Man.NW.png": "/iCOV-interactive-concernschema/static/media/Man.NW.ef72bc6f.png",
+    "static/media/Rijksoverheid.png": "/iCOV-interactive-concernschema/static/media/Rijksoverheid.2a7eb589.png",
+    "static/media/Vrouw.NW.png": "/iCOV-interactive-concernschema/static/media/Vrouw.NW.80957e64.png",
+    "static/media/flare.xml": "/iCOV-interactive-concernschema/static/media/flare.305374a3.xml",
+    "static/media/nodePreview.png": "/iCOV-interactive-concernschema/static/media/nodePreview.ab338921.png",
+    "static/media/profielfoto.png": "/iCOV-interactive-concernschema/static/media/profielfoto.2b4a9754.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.1d8e34b6.js",
+    "static/js/runtime-main.447d6411.js",
     "static/js/2.2c7d6145.chunk.js",
     "static/css/main.96e1a8f0.chunk.css",
-    "static/js/main.67cfb6a7.chunk.js"
+    "static/js/main.9e0b4fad.chunk.js"
   ]
 }
