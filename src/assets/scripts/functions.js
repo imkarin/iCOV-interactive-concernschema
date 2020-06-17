@@ -1,4 +1,7 @@
 import * as d3 from "d3";
+import React from 'react';
+
+
 
 // Determine color of node by its group
 export function nodeColor(d) {
@@ -85,6 +88,17 @@ function openPopup(clickedNode, d){
     nodeDetails.append("span")
     .attr("class", "btnClosePopup")
     .text("x")
+    
+    
+
+
+
+
+
+
+
+
+
     .on("click", () => { closePopup(clickedNode, d) })
 
     const previewDetails = nodeDetails.append("div");

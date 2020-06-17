@@ -1,6 +1,4 @@
-
-
-import seniorMedewerkerMan from '../../assets/images/icons/Man.Sr.png';
+//import seniorMedewerkerMan from '../../assets/images/icons/Man.Sr.png';
 import juniorMedewerkerMan from '../../assets/images/icons/Man.Jr.png';
 
 import seniorMedewerkerVrouw from '../../assets/images/icons/Vrouw.Sr.png';
@@ -19,3 +17,10 @@ import bedrijfInactief from '../../assets/images/icons/Bedrijf.A.png';
 import adresWoonWerk from '../../assets/images/icons/WWAdres.png';
 
 import belastingsdienstDossier from '../../assets/images/icons/BDDossier.png';
+import { nodeIcons } from './functions';
+
+import seniorMedewerkerMan from '../../assets/images/icons/Man.Sr.png';
+export seniorMedewerkerMan;
+
+
+
