@@ -10,9 +10,9 @@ function Header() {
       <header>
         <nav>
           <img src={logo} alt="iCOV logo"></img>
-          <a href="/"><FaCog className="icons"></FaCog> Instellingen</a>
-          <a href="/"><FaFolderOpen className="icons"></FaFolderOpen> Mijn Aanvragen</a>
-          <a href="/"><FaSignOutAlt className="icons"></FaSignOutAlt> Uitloggen</a>
+          <a href="#/"><FaCog className="icons"></FaCog> Instellingen</a>
+          <a href="#/"><FaFolderOpen className="icons"></FaFolderOpen> Mijn Aanvragen</a>
+          <a href="#/"><FaSignOutAlt className="icons"></FaSignOutAlt> Uitloggen</a>
 
         </nav>
       </header>

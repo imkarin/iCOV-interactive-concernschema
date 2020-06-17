@@ -12,7 +12,7 @@ function Loginpage() {
         <p>ZW Manager</p>
         <p>Politie Amersfoort</p>
 
-        <form action="/Userportal">
+        <form action="#/Userportal">
           <label htmlFor="password">Wachtwoord</label>
           <input id="password" type="password" />
           <input type="submit" value="Inloggen"></input>

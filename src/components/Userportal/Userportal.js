@@ -40,7 +40,7 @@ function Userportal() {
         <section className="AanvraagContainer">
           
 
-            <a href="/Concernschema">
+            <a href="#/Concernschema">
               <div className="Aanvraag">
                   <div className="AanvraagBox">
                     <h3>A. Awan</h3>
@@ -62,30 +62,7 @@ function Userportal() {
               </div>
             </a>
 
-            <a href="/Concernschema">
-              <div className="Aanvraag">
-                  <div className="AanvraagBox">
-                    <h3>A. Awan</h3>
-                    <img src={nodePreview} alt="icon" />
-                  </div>
-                  
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td>Datum Aanvraag</td>
-                            <td>11-06-2020</td>
-                          </tr>
-                          <tr>
-                            <td>Datum Goedkeuring</td>
-                            <td>11-06-2020</td>
-                          </tr>
-                        </tbody>
-                      </table>
-              </div>
-            </a>
-
-
-            <a href="/Concernschema">
+            <a href="#/Concernschema">
               <div className="Aanvraag">
                   <div className="AanvraagBox">
                     <h3>A. Awan</h3>
@@ -108,7 +85,30 @@ function Userportal() {
             </a>
 
 
-            <a href="/Concernschema">
+            <a href="#/Concernschema">
+              <div className="Aanvraag">
+                  <div className="AanvraagBox">
+                    <h3>A. Awan</h3>
+                    <img src={nodePreview} alt="icon" />
+                  </div>
+                  
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>Datum Aanvraag</td>
+                            <td>11-06-2020</td>
+                          </tr>
+                          <tr>
+                            <td>Datum Goedkeuring</td>
+                            <td>11-06-2020</td>
+                          </tr>
+                        </tbody>
+                      </table>
+              </div>
+            </a>
+
+
+            <a href="#/Concernschema">
               <div className="Aanvraag">
                   <div className="AanvraagBox">
                     <h3>A. Awan</h3>
