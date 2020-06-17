@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/iCOV-interactive-concernschema/static/css/main.96e1a8f0.chunk.css",
-    "main.js": "/iCOV-interactive-concernschema/static/js/main.9e0b4fad.chunk.js",
-    "main.js.map": "/iCOV-interactive-concernschema/static/js/main.9e0b4fad.chunk.js.map",
+    "main.js": "/iCOV-interactive-concernschema/static/js/main.2c384fee.chunk.js",
+    "main.js.map": "/iCOV-interactive-concernschema/static/js/main.2c384fee.chunk.js.map",
     "runtime-main.js": "/iCOV-interactive-concernschema/static/js/runtime-main.447d6411.js",
     "runtime-main.js.map": "/iCOV-interactive-concernschema/static/js/runtime-main.447d6411.js.map",
-    "static/js/2.2c7d6145.chunk.js": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js",
-    "static/js/2.2c7d6145.chunk.js.map": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js.map",
+    "static/js/2.d781bc96.chunk.js": "/iCOV-interactive-concernschema/static/js/2.d781bc96.chunk.js",
+    "static/js/2.d781bc96.chunk.js.map": "/iCOV-interactive-concernschema/static/js/2.d781bc96.chunk.js.map",
     "index.html": "/iCOV-interactive-concernschema/index.html",
-    "precache-manifest.c935b2ea539c713d91d39710aff18329.js": "/iCOV-interactive-concernschema/precache-manifest.c935b2ea539c713d91d39710aff18329.js",
+    "precache-manifest.1a2919800a2c41387b9123a68adffc9b.js": "/iCOV-interactive-concernschema/precache-manifest.1a2919800a2c41387b9123a68adffc9b.js",
     "service-worker.js": "/iCOV-interactive-concernschema/service-worker.js",
     "static/css/main.96e1a8f0.chunk.css.map": "/iCOV-interactive-concernschema/static/css/main.96e1a8f0.chunk.css.map",
-    "static/js/2.2c7d6145.chunk.js.LICENSE.txt": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js.LICENSE.txt",
+    "static/js/2.d781bc96.chunk.js.LICENSE.txt": "/iCOV-interactive-concernschema/static/js/2.d781bc96.chunk.js.LICENSE.txt",
     "static/media/Logo.png": "/iCOV-interactive-concernschema/static/media/Logo.fc8c0254.png",
     "static/media/Man.NW.png": "/iCOV-interactive-concernschema/static/media/Man.NW.ef72bc6f.png",
     "static/media/Rijksoverheid.png": "/iCOV-interactive-concernschema/static/media/Rijksoverheid.2a7eb589.png",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.447d6411.js",
-    "static/js/2.2c7d6145.chunk.js",
+    "static/js/2.d781bc96.chunk.js",
     "static/css/main.96e1a8f0.chunk.css",
-    "static/js/main.9e0b4fad.chunk.js"
+    "static/js/main.2c384fee.chunk.js"
   ]
 }

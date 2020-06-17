@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "435f955b37d6ae335fe763d9f61fc140",
+    "revision": "447010970e338accf58bd9417cf9c3f8",
     "url": "/iCOV-interactive-concernschema/index.html"
   },
   {
-    "revision": "a8408c77d6bd375094d4",
+    "revision": "2e006a7713b2d0af7e2b",
     "url": "/iCOV-interactive-concernschema/static/css/main.96e1a8f0.chunk.css"
   },
   {
-    "revision": "867852e44902f1010075",
-    "url": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js"
+    "revision": "8c2b0e4985bd83c59af7",
+    "url": "/iCOV-interactive-concernschema/static/js/2.d781bc96.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/iCOV-interactive-concernschema/static/js/2.2c7d6145.chunk.js.LICENSE.txt"
+    "url": "/iCOV-interactive-concernschema/static/js/2.d781bc96.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a8408c77d6bd375094d4",
-    "url": "/iCOV-interactive-concernschema/static/js/main.9e0b4fad.chunk.js"
+    "revision": "2e006a7713b2d0af7e2b",
+    "url": "/iCOV-interactive-concernschema/static/js/main.2c384fee.chunk.js"
   },
   {
     "revision": "e536606c6ec23fe14343",
