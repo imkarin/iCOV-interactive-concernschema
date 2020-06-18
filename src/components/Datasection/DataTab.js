@@ -5,8 +5,8 @@ const DataTab = (props) => {
      return (
 
           <div class="DataTab">
-               <button>Aanvraag R. Taghi</button>
-               <button>Aanvraag W. Holleerder</button>
+               <button>Aanvraag A. Janssen</button>
+               <button>Aanvraag S. van den Berg</button>
 
                <h1>Concernschema</h1>
                <h2>Weergave</h2>
@@ -14,7 +14,5 @@ const DataTab = (props) => {
 
   );
 }
-
-
 
 export default DataTab;
