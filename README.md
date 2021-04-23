@@ -9,7 +9,7 @@ Bekijk het prototype live op [deze pagina](https://karimeij.github.io/iCOV-inter
 Dit is onze project repository voor het ontwikkelen van een digitaal, interactief concernschema voor iCOV. Dit gebeurt vanuit een team dat werkt onder de CMD Design Agency.
 
 **Design Challenge**
-> Hoe kan een concernschema ontworpen worden, waarin de relaties dynamisch worden weergegeven, het schema intuïtief is in gebruik en waar de gebruiksvriendelijkheid wordt verbeterd? 
+> Hoe kan een concernschema ontworpen worden waarin de relaties dynamisch worden weergegeven, het schema intuïtief is in gebruik en waar de gebruiksvriendelijkheid wordt verbeterd? 
  
 ## App runnen
 1. Open de terminal
