@@ -16,7 +16,7 @@ Dit is onze project repository voor het ontwikkelen van een digitaal, interactie
 
 2. Clone deze repository
 ```
-git clone https://github.com/karimeij/iCOV-interactive-concernschema.git
+git clone https://github.com/imkarin/iCOV-interactive-concernschema.git
 ```
 
 3. Installeer modules
