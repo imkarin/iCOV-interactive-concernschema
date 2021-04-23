@@ -30,4 +30,4 @@ npm start
 ```
 
 ## License
-Deze code valt onder de [MIT](https://github.com/Awana1/iCOV-Concernschema/blob/master/LICENSE) license.
+Deze code valt onder de [MIT](https://github.com/imkarin/iCOV-interactive-concernschema/blob/master/LICENSE) license.
